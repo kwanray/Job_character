@@ -109,6 +109,7 @@ const characters = [
     verdictClass: 'verdict-sovereign',
     verdictText: 'The Final Word',
     cardClass: 'char-god',
+    sectionTitle: 'Divine Perspective',
     worldview: [
       'God speaks from the whirlwind in chapters 38–41 — and what he says defies every expectation. He does not explain the cosmic wager to Job. He does not justify his actions. He does not offer a philosophical theodicy. Instead, he asks questions: seventy-seven rhetorical questions about the foundations of the earth, the ordinances of the stars, the rain and the lightning, the wild ox and the war horse.',
       '"Where were you when I laid the foundation of the earth? Tell me, if you have understanding" (Job 38:4). The point is not humiliation — it is expansion. Job\'s framework for understanding his suffering is too small. God\'s response invites him into a far larger view of reality, one in which God\'s governance of all things — including chaos itself, symbolised by Behemoth and Leviathan — is the context in which Job\'s suffering must be understood.',
@@ -128,6 +129,7 @@ const characters = [
     verdictClass: 'verdict-refuted',
     verdictText: 'Refuted by Job',
     cardClass: 'char-satan',
+    sectionTitle: "Satan's Accusation",
     worldview: [
       'The Hebrew term here is "ha-satan" — the accuser or adversary — a prosecutorial figure in the heavenly court, not the fully developed devil of later New Testament theology. His function in the narrative is to challenge the authenticity of Job\'s faith on the most cynical possible grounds: "Does Job fear God for nothing?" (1:9).',
       'His argument is philosophically serious: all religious devotion, he suggests, is ultimately self-interested. Job loves God because God has built a hedge of protection around him, blessed his family, multiplied his possessions. Remove the hedge — remove the blessings — and Job will curse God to his face. Faith, on this view, is always transactional. The adversary is essentially making the claim that disinterested love of God does not exist; that all devotion is at root a sophisticated self-preservation strategy.',
@@ -154,7 +156,7 @@ function renderCards() {
       data-id="${char.id}"
       tabindex="0"
       role="button"
-      aria-label="Explore ${char.name}'s worldview"
+      aria-label="Explore ${char.name}"
     >
       <div class="char-card-inner">
         <div class="char-header">
@@ -168,7 +170,7 @@ function renderCards() {
         <div class="char-verdict-tag ${char.verdictClass}">${char.verdictText}</div>
       </div>
       <div class="char-card-footer">
-        <span class="char-expand-hint">Click to explore worldview</span>
+        <span class="char-expand-hint">Click to explore</span>
         <span class="char-expand-arrow" aria-hidden="true">→</span>
       </div>
     </article>
@@ -214,7 +216,7 @@ function openModal(id) {
     <p class="modal-role">${char.role}</p>
 
     <div class="modal-section">
-      <div class="modal-section-title">Worldview</div>
+      <div class="modal-section-title">${char.sectionTitle || 'Worldview'}</div>
       ${worldviewHTML}
     </div>
 
