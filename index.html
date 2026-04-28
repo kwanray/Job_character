@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Book of Job — Suffering, Sovereignty & Faith</title>
+  <meta name="description" content="An interactive exploration of the Book of Job through the philosophy and theology of Norman Geisler. For Christian teenagers and anyone wrestling with suffering and faith.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav id="navbar">
+    <div class="nav-container">
+      <a href="#hero" class="nav-logo">Job</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#characters" class="nav-link">Characters</a></li>
+        <li><a href="#problem-of-evil" class="nav-link">Problem of Evil</a></li>
+        <li><a href="#exposition" class="nav-link">Geisler's Exposition</a></li>
+        <li><a href="#for-teens" class="nav-link">For Teens</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">The Biblical Book of</p>
+      <h1>Job</h1>
+      <p class="hero-subtitle">Suffering, Sovereignty &amp; the Search for God</p>
+      <p class="hero-desc">Explore the worldviews of each character, wrestle with the problem of evil through Norman Geisler's theology, and discover what this ancient book means for your life today.</p>
+      <div class="hero-buttons">
+        <a href="#characters" class="btn-primary">Meet the Characters</a>
+        <a href="#problem-of-evil" class="btn-secondary">Explore Theodicy</a>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <span>Scroll to explore</span>
+      <div class="scroll-arrow"></div>
+    </div>
+  </header>
+
+  <!-- Characters Section -->
+  <section id="characters">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Meet the Cast</span>
+        <h2>Characters of Job</h2>
+        <p class="section-desc">Each character represents a distinct worldview — a different answer to why the righteous suffer. Click any character to explore their theology and how Norman Geisler evaluates it.</p>
+      </div>
+      <div class="character-grid" id="characterGrid">
+        <!-- Rendered by app.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Character Modal -->
+  <div id="modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalName" hidden>
+    <div class="modal-overlay" id="modalOverlay"></div>
+    <div class="modal-panel">
+      <button class="modal-close" id="modalClose" aria-label="Close character detail">&#x2715;</button>
+      <div class="modal-scroll">
+        <div id="modalBody"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Problem of Evil Section -->
+  <section id="problem-of-evil" class="section-dark">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Theodicy</span>
+        <h2>The Problem of Evil</h2>
+        <p class="section-desc">Why does a good, all-powerful God allow suffering? This is the question at the heart of Job — and at the heart of Norman Geisler's life work as a philosopher and theologian.</p>
+      </div>
+
+      <blockquote class="featured-quote">
+        "The problem of evil is not whether God exists in spite of evil, but whether there is a satisfying explanation of how God and evil can both exist."
+        <cite>— Norman Geisler, <em>The Roots of Evil</em></cite>
+      </blockquote>
+
+      <div class="accordion" id="evilAccordion">
+
+        <div class="accordion-item">
+          <button class="accordion-btn" aria-expanded="false">
+            <span class="accordion-num">01</span>
+            <span class="accordion-title">What Is the Problem?</span>
+            <span class="accordion-icon" aria-hidden="true"></span>
+          </button>
+          <div class="accordion-panel" hidden>
+            <div class="accordion-inner">
+              <p>The problem of evil takes two forms. The <strong>logical problem</strong> (posed by philosopher J.L. Mackie) argues that an all-good, all-powerful God is logically incompatible with evil's existence — if God could prevent evil and wanted to, he would. The <strong>evidential problem</strong> (posed by William Rowe) is softer: even if God and evil aren't logically incompatible, the sheer scale and intensity of suffering makes God's existence unlikely.</p>
+              <p>Job faces both. His suffering raises the logical question (why didn't God protect a blameless man?) and the evidential question (what purpose could <em>this</em> level of loss possibly serve?). The book doesn't dodge these questions — it dramatises them with unsparing honesty.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-btn" aria-expanded="false">
+            <span class="accordion-num">02</span>
+            <span class="accordion-title">The Free Will Defense</span>
+            <span class="accordion-icon" aria-hidden="true"></span>
+          </button>
+          <div class="accordion-panel" hidden>
+            <div class="accordion-inner">
+              <p>Geisler argues that <strong>moral evil</strong> — suffering caused by human choices — flows from genuine freedom. A God who creates beings capable of real love must create beings capable of real choice. Genuine choice includes the possibility of wrong choices. Wrong choices produce harm.</p>
+              <p>This doesn't explain all evil in Job (his disasters include natural catastrophes), but it explains why a good God might create a world with suffering potential at all. The capacity for suffering is the shadow side of the capacity for love.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-btn" aria-expanded="false">
+            <span class="accordion-num">03</span>
+            <span class="accordion-title">The Greater Good Defense</span>
+            <span class="accordion-icon" aria-hidden="true"></span>
+          </button>
+          <div class="accordion-panel" hidden>
+            <div class="accordion-inner">
+              <p>Geisler maintains that God <strong>never causes evil</strong> but may <strong>permit</strong> evil when it serves a greater purpose that could not otherwise be achieved. The distinction matters: God is not the author of suffering, but he is sovereign over it.</p>
+              <p>In Job, God permits the adversary's challenge not because he is cruel, but because Job's faithfulness under fire will demonstrate something significant: that disinterested, genuine faith exists. The greater good — the vindication of faithful love — required the test.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-btn" aria-expanded="false">
+            <span class="accordion-num">04</span>
+            <span class="accordion-title">Soul-Making Theodicy</span>
+            <span class="accordion-icon" aria-hidden="true"></span>
+          </button>
+          <div class="accordion-panel" hidden>
+            <div class="accordion-inner">
+              <p>Drawing on the Irenaean tradition, Geisler acknowledges that suffering can be the necessary context for the formation of virtues that cannot develop in a pain-free world. Courage requires real danger. Patience requires real frustration. Compassion requires real pain.</p>
+              <p>Elihu, the youngest character in Job, articulates a version of this: God uses suffering as a form of communication — to turn people from destructive paths and refine their character. Not all suffering is punitive; some is formative.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-btn" aria-expanded="false">
+            <span class="accordion-num">05</span>
+            <span class="accordion-title">Eschatological Resolution</span>
+            <span class="accordion-icon" aria-hidden="true"></span>
+          </button>
+          <div class="accordion-panel" hidden>
+            <div class="accordion-inner">
+              <p>Geisler insists that ultimate theodicy awaits eternity. The final account is not closed in this life. God will right every wrong; suffering that appears purposeless in the present will look different in light of what comes after.</p>
+              <p>Job's restoration in chapter 42 — double what he lost — is a foretaste of this. It is not meant to suggest that all suffering ends in material prosperity, but that God's ultimate intention toward his people is redemptive. The last word belongs to God, not to suffering.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Geisler's Exposition -->
+  <section id="exposition">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Biblical Analysis</span>
+        <h2>Geisler's Exposition of Job</h2>
+        <p class="section-desc">Norman Geisler reads Job as a carefully structured theological drama. Understanding its architecture is the key to interpreting its message correctly.</p>
+      </div>
+
+      <div class="tabs">
+        <div class="tab-buttons" role="tablist" aria-label="Exposition sections">
+          <button class="tab-btn active" data-tab="structure" role="tab" aria-selected="true" aria-controls="tab-structure">Structure</button>
+          <button class="tab-btn" data-tab="friends" role="tab" aria-selected="false" aria-controls="tab-friends">The Friends' Error</button>
+          <button class="tab-btn" data-tab="elihu" role="tab" aria-selected="false" aria-controls="tab-elihu">Elihu's Role</button>
+          <button class="tab-btn" data-tab="whirlwind" role="tab" aria-selected="false" aria-controls="tab-whirlwind">The Whirlwind</button>
+        </div>
+
+        <div class="tab-panels">
+
+          <div class="tab-panel active" id="tab-structure" role="tabpanel">
+            <div class="timeline">
+              <div class="timeline-item">
+                <div class="timeline-chapters">Ch. 1–2</div>
+                <div class="timeline-body">
+                  <h3>Prose Prologue</h3>
+                  <p>The heavenly court. God and the adversary. Job's character established as "blameless and upright." Two waves of catastrophe strip Job of wealth, children, and health. The dramatic irony: the reader knows what Job does not — this is a test of disinterested faith.</p>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-chapters">Ch. 3–31</div>
+                <div class="timeline-body">
+                  <h3>Three Cycles of Dialogue</h3>
+                  <p>Three rounds of speeches between Job and his friends (Eliphaz, Bildad, Zophar). Each round escalates in intensity. The friends grow harsher; Job grows more confident in his innocence and his demand to meet God. By round three, Zophar has nothing left to say.</p>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-chapters">Ch. 32–37</div>
+                <div class="timeline-body">
+                  <h3>Elihu's Speeches</h3>
+                  <p>The young Elihu has waited respectfully. Now he speaks — rebuking both the friends (for condemning Job wrongly) and Job (for implying God is unjust). His key contribution: suffering can be instructive, not only punitive. He is a theological bridge to what follows.</p>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-chapters">Ch. 38–41</div>
+                <div class="timeline-body">
+                  <h3>God Speaks from the Whirlwind</h3>
+                  <p>Two divine speeches. Not an explanation of Job's suffering — but 77+ rhetorical questions about creation, cosmos, and creature. "Where were you when I laid the foundations of the earth?" Job is invited into God's perspective. The crisis resolves — not through argument but through encounter.</p>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-chapters">Ch. 42</div>
+                <div class="timeline-body">
+                  <h3>Prose Epilogue</h3>
+                  <p>Job's transformation: "My ears had heard of you, but now my eyes have seen you." God rebukes the three friends for speaking wrongly about him. Job intercedes for them. Job is restored — double his former possessions. Faith vindicated. Suffering was not the last word.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tab-panel" id="tab-friends" role="tabpanel" hidden>
+            <div class="tab-content-wrap">
+              <h3>Why the Friends Were Wrong</h3>
+              <p class="tab-intro">Geisler's analysis centres on a critical theological error: the three friends took a generally true principle and applied it mechanically to a specific person without justification.</p>
+              <div class="points-grid">
+                <div class="point-card">
+                  <div class="point-icon">⚖️</div>
+                  <h4>The Deuteronomic Assumption</h4>
+                  <p>They assumed the covenant principle of Deuteronomy 28 (blessings for obedience, curses for disobedience) applies directly and immediately to every individual in every circumstance. This confuses a national covenant promise with a universal algorithm for personal fate.</p>
+                </div>
+                <div class="point-card">
+                  <div class="point-icon">🔄</div>
+                  <h4>Reasoning Backwards</h4>
+                  <p>They reasoned from effect to cause: "You are suffering, therefore you sinned." This commits the logical fallacy of affirming the consequent. Even if sin always produced suffering, it would not follow that all suffering proves sin.</p>
+                </div>
+                <div class="point-card">
+                  <div class="point-icon">🗡️</div>
+                  <h4>Theology as Weapon</h4>
+                  <p>They came to console but became accusers. Geisler notes the pastoral tragedy: they deployed correct theological categories (God's holiness, human sinfulness) as weapons against a suffering man, rather than as comfort for him.</p>
+                </div>
+                <div class="point-card">
+                  <div class="point-icon">📜</div>
+                  <h4>God's Direct Verdict</h4>
+                  <p>"You have not spoken of me what is right, as my servant Job has." (Job 42:7) God rebukes the friends explicitly. Job's angry, honest wrestling was more righteous before God than the friends' polished, confident orthodoxy. Right theology wrongly applied is still theological error.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tab-panel" id="tab-elihu" role="tabpanel" hidden>
+            <div class="tab-content-wrap">
+              <h3>Elihu: The Transitional Voice</h3>
+              <p class="tab-intro">Elihu is the book's most intriguing character — present in chapters 32–37, absent from the epilogue's rebuke, and often overlooked in popular readings of Job.</p>
+              <div class="points-grid">
+                <div class="point-card">
+                  <div class="point-icon">🤫</div>
+                  <h4>The Younger Who Waited</h4>
+                  <p>Elihu respects the elders' right to speak first. When they run out of answers, he steps in — rebuking the friends for failing to refute Job and rebuking Job for implying God had been unjust to him.</p>
+                </div>
+                <div class="point-card">
+                  <div class="point-icon">🎓</div>
+                  <h4>Suffering as Instruction</h4>
+                  <p>Elihu's theological advance: suffering is not only retrospective punishment but <em>proleptic</em> instruction. God may use hardship to speak before a person goes further down a destructive path — to warn, redirect, and keep them from worse harm. (Job 33:14–18)</p>
+                </div>
+                <div class="point-card">
+                  <div class="point-icon">✅</div>
+                  <h4>Not Rebuked in the Epilogue</h4>
+                  <p>Crucially, God does not rebuke Elihu in chapter 42 — only the three friends are condemned. Geisler interprets this as a sign that Elihu's theology, while incomplete, is directionally correct. He represents a genuine step beyond simple retribution theology.</p>
+                </div>
+                <div class="point-card">
+                  <div class="point-icon">🌉</div>
+                  <h4>Bridge to the Divine Speeches</h4>
+                  <p>Elihu's final speech closes with language about God speaking through creation — "God thunders wondrously with his voice" — which directly prepares for the voice from the whirlwind in chapter 38. He is a theological bridge, not a dead end.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tab-panel" id="tab-whirlwind" role="tabpanel" hidden>
+            <div class="tab-content-wrap">
+              <h3>The Answer from the Whirlwind</h3>
+              <p class="tab-intro">Chapters 38–41 are among the most dramatic passages in all of Scripture. God finally speaks — but not to answer Job's questions directly.</p>
+              <div class="points-grid">
+                <div class="point-card">
+                  <div class="point-icon">🌪️</div>
+                  <h4>Questions, Not Answers</h4>
+                  <p>God's response consists of 77+ rhetorical questions. He does not explain the cosmic wager. He does not justify Job's suffering. Instead, he expands Job's frame of reference entirely: "Where were you when I laid the foundation of the earth?" (Job 38:4)</p>
+                </div>
+                <div class="point-card">
+                  <div class="point-icon">🌌</div>
+                  <h4>A Bigger View of God</h4>
+                  <p>Geisler's central interpretation: the real problem was not that Job lacked answers — it was that Job lacked an adequate vision of God. The whirlwind speech provides that vision. The encounter itself resolves the crisis. Not argument, but presence.</p>
+                </div>
+                <div class="point-card">
+                  <div class="point-icon">🐉</div>
+                  <h4>Behemoth and Leviathan</h4>
+                  <p>God's second speech focuses on two chaos-creatures beyond human control. The point: even the most terrifying forces in creation are under God's governance. Chaos itself is not outside his sovereignty. If God manages Leviathan, he can manage Job's suffering.</p>
+                </div>
+                <div class="point-card">
+                  <div class="point-icon">👁️</div>
+                  <h4>Job's Transformation</h4>
+                  <p>"My ears had heard of you, but now my eyes have seen you." (42:5) Job's response is not "Now I understand why I suffered." It is "Now I have <em>seen</em> you." The resolution is personal encounter, not intellectual explanation — Geisler's central interpretive claim about the whole book.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- For Teens Section -->
+  <section id="for-teens" class="section-dark">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Application</span>
+        <h2>What Job Means for You</h2>
+        <p class="section-desc">Written for Christian teenagers in Singapore — but if you're wrestling with suffering, pressure, and faith, this is for you too. Job's questions are timeless.</p>
+      </div>
+
+      <div class="teen-grid">
+
+        <div class="teen-card">
+          <div class="teen-icon">📚</div>
+          <h3>Academic Pressure</h3>
+          <p class="teen-context">PSLE. O-Levels. A-Levels. The weight of an education system built on performance — and the nagging fear that a bad result means God is displeased with you.</p>
+          <div class="teen-job-link">
+            <span class="job-link-label">What Job teaches:</span>
+            Job lost everything he had built — and it was not because of any failure on his part. His friends assumed it was. They were wrong, and God rebuked them for it. A hard season does not mean you are being punished.
+          </div>
+          <p class="teen-application">Not all suffering is punishment. Lament is allowed. Bring your anxiety to God honestly — that is exactly what Job did, and God called it more righteous than polished, performed faith.</p>
+          <div class="teen-verse">"Do not be anxious about anything, but in everything by prayer... present your requests to God." — Philippians 4:6</div>
+        </div>
+
+        <div class="teen-card">
+          <div class="teen-icon">👨‍👩‍👦</div>
+          <h3>Family Expectations</h3>
+          <p class="teen-context">In Singapore's family culture, the weight of parental sacrifice is real. Disappointing your parents can feel like a moral failure — even a spiritual one.</p>
+          <div class="teen-job-link">
+            <span class="job-link-label">What Job teaches:</span>
+            Job's integrity was his own — not derived from his social standing or family reputation. When everything was stripped away, he had to know who he was before God, not before others. His worth did not change with his circumstances.
+          </div>
+          <p class="teen-application">Your identity before God is not defined by your family's honour or your performance. Geisler's soul-making principle: pressure is the context in which real character is formed — not destroyed.</p>
+          <div class="teen-verse">"Am I now trying to win the approval of human beings, or of God?" — Galatians 1:10</div>
+        </div>
+
+        <div class="teen-card">
+          <div class="teen-icon">🤔</div>
+          <h3>Faith Questions &amp; Doubt</h3>
+          <p class="teen-context">University, secular peers, social media. Questions about science, suffering, and whether Christianity holds up. The pressure to perform certainty you don't actually feel.</p>
+          <div class="teen-job-link">
+            <span class="job-link-label">What Job teaches:</span>
+            Job asks the hardest questions — out loud, directly at God. God does not rebuke him for asking. He rebukes the friends who gave confident, tidy answers instead. Honest wrestling is more faithful than performed certainty.
+          </div>
+          <p class="teen-application">Your questions are not disqualifying. Doubt taken honestly to God is itself an act of faith. Geisler: the encounter with God — not the resolution of every question — is what transforms us.</p>
+          <div class="teen-verse">"Though he slay me, I will hope in him; yet I will argue my ways to his face." — Job 13:15</div>
+        </div>
+
+        <div class="teen-card">
+          <div class="teen-icon">🌑</div>
+          <h3>Suffering Without Answers</h3>
+          <p class="teen-context">Mental health struggles, broken families, loss, grief. Pain that doesn't make sense — and a church culture that sometimes demands you explain it or smile through it.</p>
+          <div class="teen-job-link">
+            <span class="job-link-label">What Job teaches:</span>
+            God's answer to Job was not an explanation — it was a presence. The whirlwind did not resolve Job's suffering intellectually; it gave him an encounter with the living God. That was enough.
+          </div>
+          <p class="teen-application">You don't need to resolve your suffering intellectually before God can meet you in it. The God who governs Leviathan governs your pain too. Geisler: the final resolution may lie beyond what we can see now — but it is real.</p>
+          <div class="teen-verse">"Our present sufferings are not worth comparing with the glory that will be revealed." — Romans 8:18</div>
+        </div>
+
+        <div class="teen-card">
+          <div class="teen-icon">📱</div>
+          <h3>Watch Who You Listen To</h3>
+          <p class="teen-context">Prosperity gospel preachers, influencers with spiritual frameworks for every problem, and well-meaning friends who have confident answers to why you're struggling.</p>
+          <div class="teen-job-link">
+            <span class="job-link-label">What Job teaches:</span>
+            Job's friends came with theological systems and used them to wound him. They gave confident answers to questions they didn't understand. God rebuked them for it. Not all pastoral advice is godly advice — even when it sounds correct.
+          </div>
+          <p class="teen-application">The prosperity gospel — "be faithful and God will bless you materially" — is exactly the friends' error. Test what you hear. God vindicated Job's honest struggle over the friends' tidy orthodoxy.</p>
+          <div class="teen-verse">"You have not spoken of me what is right, as my servant Job has." — Job 42:7</div>
+        </div>
+
+        <div class="teen-card">
+          <div class="teen-icon">✊</div>
+          <h3>Identity &amp; Resilience</h3>
+          <p class="teen-context">When everything is stripped away — results, reputation, approval — who are you? What remains when the externals are gone?</p>
+          <div class="teen-job-link">
+            <span class="job-link-label">What Job teaches:</span>
+            Job was "blameless and upright" before his suffering, and God restores him after. His identity was not defined by his prosperity. The adversary believed removing the blessings would remove the faith. He was wrong.
+          </div>
+          <p class="teen-application">You are not your grades, your CCA record, your social standing, or your family's expectations. Geisler: disinterested faith — loving God for who he is, not what he gives — is the deepest resilience there is. Job proved it exists.</p>
+          <div class="teen-verse">"Does Job fear God for nothing?" — Job 1:9 <em>(The accuser asked. The answer was yes.)</em></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-about">
+          <h3>The Book of Job</h3>
+          <p>An interactive resource exploring Job's theology through the philosophical lens of Norman Geisler — for anyone wrestling with suffering and faith.</p>
+        </div>
+        <div class="footer-credits">
+          <h4>Sources</h4>
+          <ul>
+            <li>Norman Geisler, <em>The Roots of Evil</em> (1978)</li>
+            <li>Norman Geisler, <em>If God, Why Evil?</em> (2011)</li>
+            <li>Norman Geisler, <em>Systematic Theology</em> Vol. 2</li>
+            <li>Bible quotations: English Standard Version (ESV)</li>
+          </ul>
+        </div>
+        <div class="footer-nav">
+          <h4>Navigate</h4>
+          <ul>
+            <li><a href="#characters">Characters</a></li>
+            <li><a href="#problem-of-evil">Problem of Evil</a></li>
+            <li><a href="#exposition">Geisler's Exposition</a></li>
+            <li><a href="#for-teens">For Teens</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>Built for Christian teenagers in Singapore and everyone wrestling with suffering and faith.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
