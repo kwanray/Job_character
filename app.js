@@ -7,7 +7,7 @@
 const characters = [
   {
     id: 'job',
-    emoji: '🙏',
+    imgSrc: 'img/job.svg',
     name: 'Job',
     role: 'The Righteous Sufferer',
     teaser: 'A man of unmatched integrity who refuses to stay silent — and whose honest wrestling God calls more righteous than polished orthodoxy.',
@@ -26,7 +26,7 @@ const characters = [
   },
   {
     id: 'eliphaz',
-    emoji: '👁️',
+    imgSrc: 'img/eliphaz.svg',
     name: 'Eliphaz',
     role: 'The Experiential Retributionist',
     teaser: 'The most sophisticated of the three friends — appeals to mystical experience and observation. "I have seen: no innocent person perishes."',
@@ -45,7 +45,7 @@ const characters = [
   },
   {
     id: 'bildad',
-    emoji: '📜',
+    imgSrc: 'img/bildad.svg',
     name: 'Bildad',
     role: 'The Traditionalist',
     teaser: '"Ask the former generations" — what the ancestors believed must be true, and the ancestors say the wicked suffer.',
@@ -64,7 +64,7 @@ const characters = [
   },
   {
     id: 'zophar',
-    emoji: '⚡',
+    imgSrc: 'img/zophar.svg',
     name: 'Zophar',
     role: 'The Dogmatist',
     teaser: 'The harshest of the three — no appeals to experience or tradition, just blunt assertion. Job deserves worse than he is getting.',
@@ -83,7 +83,7 @@ const characters = [
   },
   {
     id: 'elihu',
-    emoji: '🌱',
+    imgSrc: 'img/elihu.svg',
     name: 'Elihu',
     role: 'The Mediator',
     teaser: 'The young man who waits — and then advances the theology further than anyone. Not rebuked by God. A step toward the truth.',
@@ -102,7 +102,7 @@ const characters = [
   },
   {
     id: 'god',
-    emoji: '✨',
+    imgSrc: 'img/god.svg',
     name: 'God (Yahweh)',
     role: 'The Sovereign Creator',
     teaser: 'His answer is not an explanation — it is an encounter. "Where were you when I laid the foundation of the earth?"',
@@ -122,7 +122,7 @@ const characters = [
   },
   {
     id: 'satan',
-    emoji: '🔗',
+    imgSrc: 'img/satan.svg',
     name: 'Satan',
     role: 'The Cynical Accuser',
     teaser: '"Does Job fear God for nothing?" — The adversary\'s challenge is the engine of the entire book. The narrative proves him catastrophically wrong.',
@@ -160,7 +160,7 @@ function renderCards() {
     >
       <div class="char-card-inner">
         <div class="char-header">
-          <div class="char-avatar">${char.emoji}</div>
+          <div class="char-avatar"><img src="${char.imgSrc}" alt="${char.name}" loading="lazy"></div>
           <div class="char-names">
             <div class="char-name">${char.name}</div>
             <div class="char-role">${char.role}</div>
@@ -210,7 +210,7 @@ function openModal(id) {
     .join('');
 
   modalBody.innerHTML = `
-    <div class="modal-avatar">${char.emoji}</div>
+    <div class="modal-avatar"><img src="${char.imgSrc}" alt="${char.name}"></div>
     <div class="modal-tag">${char.role}</div>
     <h2 class="modal-name" id="modalName">${char.name}</h2>
     <p class="modal-role">${char.role}</p>

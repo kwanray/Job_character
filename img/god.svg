@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#20160a"/>
+      <stop offset="100%" stop-color="#080604"/>
+    </radialGradient>
+    <radialGradient id="core" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fff8d0"/>
+      <stop offset="25%" stop-color="#fce080"/>
+      <stop offset="55%" stop-color="#f0a820"/>
+      <stop offset="80%" stop-color="#c07010" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#f0a820" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="200" height="200" rx="16" fill="url(#bg)"/>
+
+  <!-- Outer atmospheric glow -->
+  <circle cx="100" cy="100" r="88" fill="url(#core)" opacity="0.35"/>
+
+  <!-- Whirlwind rings — tilted ellipses suggesting rotating storm -->
+  <ellipse cx="100" cy="100" rx="76" ry="28" fill="none" stroke="#b87818" stroke-width="1.5" opacity="0.20" transform="rotate(-25 100 100)"/>
+  <ellipse cx="100" cy="100" rx="70" ry="24" fill="none" stroke="#c88820" stroke-width="1" opacity="0.25" transform="rotate(18 100 100)"/>
+  <ellipse cx="100" cy="100" rx="62" ry="20" fill="none" stroke="#d89828" stroke-width="1.2" opacity="0.30" transform="rotate(-38 100 100)"/>
+  <ellipse cx="100" cy="100" rx="54" ry="18" fill="none" stroke="#e0a830" stroke-width="1.2" opacity="0.38" transform="rotate(28 100 100)"/>
+  <ellipse cx="100" cy="100" rx="46" ry="16" fill="none" stroke="#eab838" stroke-width="1.5" opacity="0.45" transform="rotate(-12 100 100)"/>
+  <ellipse cx="100" cy="100" rx="38" ry="14" fill="none" stroke="#f0c848" stroke-width="1.5" opacity="0.55" transform="rotate(22 100 100)"/>
+  <ellipse cx="100" cy="100" rx="30" ry="11" fill="none" stroke="#f8d860" stroke-width="2" opacity="0.65" transform="rotate(-8 100 100)"/>
+
+  <!-- Central radiant orb -->
+  <circle cx="100" cy="100" r="26" fill="#f8e070" opacity="0.65"/>
+  <circle cx="100" cy="100" r="20" fill="#fce890" opacity="0.80"/>
+  <circle cx="100" cy="100" r="13" fill="#fff4b0" opacity="0.92"/>
+  <circle cx="100" cy="100" r="7"  fill="white"/>
+
+  <!-- Radiating light shafts -->
+  <line x1="100" y1="74" x2="100" y2="52" stroke="white" stroke-width="1.5" opacity="0.55"/>
+  <line x1="100" y1="126" x2="100" y2="148" stroke="white" stroke-width="1.5" opacity="0.55"/>
+  <line x1="74" y1="100" x2="52" y2="100" stroke="white" stroke-width="1.5" opacity="0.55"/>
+  <line x1="126" y1="100" x2="148" y2="100" stroke="white" stroke-width="1.5" opacity="0.55"/>
+  <line x1="81" y1="81" x2="66" y2="66" stroke="white" stroke-width="1" opacity="0.38"/>
+  <line x1="119" y1="81" x2="134" y2="66" stroke="white" stroke-width="1" opacity="0.38"/>
+  <line x1="81" y1="119" x2="66" y2="134" stroke="white" stroke-width="1" opacity="0.38"/>
+  <line x1="119" y1="119" x2="134" y2="134" stroke="white" stroke-width="1" opacity="0.38"/>
+
+  <!-- Scripture hint below -->
+  <text x="100" y="176" text-anchor="middle" font-size="7.5" fill="#c88820" opacity="0.55" font-family="Georgia, serif" font-style="italic">from the whirlwind</text>
+  <text x="100" y="187" text-anchor="middle" font-size="7" fill="#c88820" opacity="0.40" font-family="Georgia, serif" font-style="italic">— Job 38:1</text>
+</svg>

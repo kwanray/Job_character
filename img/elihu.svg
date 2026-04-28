@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#0a1808"/>
+      <stop offset="100%" stop-color="#030804"/>
+    </radialGradient>
+  </defs>
+  <rect width="200" height="200" rx="16" fill="url(#bg)"/>
+
+  <!-- Sage green robe — simpler, younger -->
+  <path d="M0 200L0 155Q50 143Q100 149Q150 143Q200 155L200 200Z" fill="#4a6838"/>
+  <path d="M78 149Q100 154Q122 149" stroke="#6a9050" stroke-width="1.5" fill="none"/>
+
+  <!-- Neck -->
+  <ellipse cx="100" cy="141" rx="16" ry="12" fill="#b87848"/>
+
+  <!-- Face — young, round, smooth -->
+  <ellipse cx="100" cy="99" rx="43" ry="46" fill="#b87848"/>
+  <!-- Youthful flush -->
+  <ellipse cx="78" cy="110" rx="10" ry="7" fill="#d09060" opacity="0.28"/>
+  <ellipse cx="122" cy="110" rx="10" ry="7" fill="#d09060" opacity="0.28"/>
+
+  <!-- Hair — dark, full, youthful -->
+  <path d="M60 96Q56 66Q68 48Q82 35Q100 30Q118 32Q134 42Q146 57Q148 86Q146 98Q140 72Q128 56Q112 48Q100 46Q86 47Q72 56Q62 76Q60 96Z" fill="#1c1208"/>
+  <path d="M60 96Q54 110Q56 128Q64 144" stroke="#1c1208" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <path d="M140 96Q146 110Q144 128Q136 144" stroke="#1c1208" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <!-- Youthful wisp of hair at front -->
+  <path d="M78 50Q72 39Q76 30" stroke="#1c1208" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+  <!-- Eyebrows — open, slightly raised — earnest, eager -->
+  <path d="M73 85Q83 80Q91 84" stroke="#1c1208" stroke-width="2" stroke-linecap="round" fill="none"/>
+  <path d="M109 84Q117 80Q127 85" stroke="#1c1208" stroke-width="2" stroke-linecap="round" fill="none"/>
+
+  <!-- Left eye — LARGE, wide-open, sincere (Ghibli style) -->
+  <ellipse cx="83" cy="97" rx="12" ry="13" fill="#f4ede0"/>
+  <ellipse cx="83" cy="97" rx="8.5" ry="9" fill="#4a2c18"/>
+  <circle cx="83" cy="97" r="6" fill="#150e06"/>
+  <circle cx="87" cy="93" r="2.2" fill="white"/>
+  <circle cx="80" cy="100" r="1" fill="white" opacity="0.5"/>
+  <path d="M71 96Q83 89Q95 96" stroke="#1c1208" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+  <path d="M72 98Q83 105Q94 98" stroke="#a07050" stroke-width="1" fill="none" stroke-linecap="round"/>
+
+  <!-- Right eye — LARGE, wide-open -->
+  <ellipse cx="117" cy="97" rx="12" ry="13" fill="#f4ede0"/>
+  <ellipse cx="117" cy="97" rx="8.5" ry="9" fill="#4a2c18"/>
+  <circle cx="117" cy="97" r="6" fill="#150e06"/>
+  <circle cx="121" cy="93" r="2.2" fill="white"/>
+  <circle cx="114" cy="100" r="1" fill="white" opacity="0.5"/>
+  <path d="M105 96Q117 89Q129 96" stroke="#1c1208" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+  <path d="M106 98Q117 105Q128 98" stroke="#a07050" stroke-width="1" fill="none" stroke-linecap="round"/>
+
+  <!-- Nose — small, young -->
+  <path d="M97 111Q100 115Q103 111" stroke="#906040" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+
+  <!-- Mouth — earnest, slightly open as if mid-speech -->
+  <path d="M88 123Q100 121Q112 123" stroke="#7a4820" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M90 123Q100 128Q110 123" stroke="#5a3010" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+
+  <!-- Very faint stubble — barely there, young -->
+  <ellipse cx="100" cy="130" rx="24" ry="8" fill="#1c1208" opacity="0.08"/>
+</svg>

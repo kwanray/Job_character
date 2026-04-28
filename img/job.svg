@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#2e1c0c"/>
+      <stop offset="100%" stop-color="#0c0804"/>
+    </radialGradient>
+  </defs>
+  <rect width="200" height="200" rx="16" fill="url(#bg)"/>
+
+  <!-- Robe — rough, torn -->
+  <path d="M0 200L0 158Q30 146 70 150Q100 153 130 150Q170 146 200 158L200 200Z" fill="#6b3e20"/>
+  <path d="M78 150Q100 145Q122 150" stroke="#3d2010" stroke-width="2" stroke-linecap="round" fill="none"/>
+
+  <!-- Neck -->
+  <ellipse cx="100" cy="138" rx="15" ry="12" fill="#c47848"/>
+
+  <!-- Face -->
+  <ellipse cx="100" cy="97" rx="44" ry="46" fill="#c47848"/>
+  <ellipse cx="100" cy="110" rx="38" ry="28" fill="#b06838" opacity="0.25"/>
+
+  <!-- Ash smear on forehead -->
+  <ellipse cx="100" cy="68" rx="15" ry="4" fill="#807060" opacity="0.45"/>
+
+  <!-- Hair — dark, disheveled -->
+  <path d="M58 94Q53 66Q65 48Q80 36Q100 32Q120 33Q138 44Q150 60Q150 86Q147 97Q140 74Q128 58Q113 50Q100 48Q85 49Q70 57Q60 74Q58 94Z" fill="#1c1008"/>
+  <path d="M60 84Q52 66Q58 52" stroke="#1c1008" stroke-width="4" stroke-linecap="round" fill="none"/>
+  <path d="M66 72Q58 58Q64 46" stroke="#281808" stroke-width="3" stroke-linecap="round" fill="none"/>
+  <path d="M140 76Q148 60Q144 48" stroke="#1c1008" stroke-width="4" stroke-linecap="round" fill="none"/>
+  <path d="M144 90Q152 74Q150 60" stroke="#1c1008" stroke-width="3" stroke-linecap="round" fill="none"/>
+
+  <!-- Eyebrows — furrowed -->
+  <path d="M71 84Q82 79Q90 82" stroke="#1c1008" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+  <path d="M110 82Q119 79Q129 84" stroke="#1c1008" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+
+  <!-- Left eye — large, sad, upward gaze -->
+  <ellipse cx="82" cy="96" rx="11" ry="12" fill="#f2ece0"/>
+  <ellipse cx="82" cy="94" rx="7" ry="8" fill="#6b3818"/>
+  <circle cx="82" cy="94" r="4.5" fill="#140c04"/>
+  <circle cx="85" cy="91" r="2" fill="white"/>
+  <path d="M71 95Q82 89Q93 95" stroke="#1c1008" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+  <path d="M72 97Q82 103Q92 97" stroke="#a06840" stroke-width="1" fill="none" stroke-linecap="round"/>
+
+  <!-- Right eye -->
+  <ellipse cx="118" cy="96" rx="11" ry="12" fill="#f2ece0"/>
+  <ellipse cx="118" cy="94" rx="7" ry="8" fill="#6b3818"/>
+  <circle cx="118" cy="94" r="4.5" fill="#140c04"/>
+  <circle cx="121" cy="91" r="2" fill="white"/>
+  <path d="M107 95Q118 89Q129 95" stroke="#1c1008" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+  <path d="M108 97Q118 103Q128 97" stroke="#a06840" stroke-width="1" fill="none" stroke-linecap="round"/>
+
+  <!-- Nose -->
+  <path d="M97 108Q100 113Q103 108" stroke="#a05c30" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+
+  <!-- Mouth — downturned, sorrowful -->
+  <path d="M87 121Q100 118Q113 121" stroke="#7a3c1c" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M87 121Q85 124" stroke="#7a3c1c" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+  <path d="M113 121Q115 124" stroke="#7a3c1c" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+
+  <!-- Beard — unkempt -->
+  <path d="M60 113Q62 130Q68 144Q82 156Q100 160Q118 156Q132 144Q138 130Q140 113Q132 122Q120 127Q110 130Q100 131Q90 130Q80 127Q68 122Q60 113Z" fill="#1c1008"/>
+  <path d="M80 122Q78 137Q82 150" stroke="#2e1c10" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <path d="M100 124Q100 139Q100 152" stroke="#2e1c10" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <path d="M120 122Q122 137Q118 150" stroke="#2e1c10" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+
+  <!-- Tear -->
+  <path d="M74 101Q73 108Q75 116" stroke="#b8d4ee" stroke-width="1.8" fill="none" stroke-linecap="round" opacity="0.7"/>
+</svg>
