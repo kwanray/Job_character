@@ -280,6 +280,7 @@ function initAccordion() {
 
       if (!isOpen) {
         item.classList.add('open');
+        // Read scrollHeight before any display change — no hidden attr, so this works
         panel.style.maxHeight = panel.scrollHeight + 'px';
         btn.setAttribute('aria-expanded', 'true');
       }
