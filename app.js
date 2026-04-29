@@ -7,7 +7,7 @@
 const characters = [
   {
     id: 'job',
-    imgSrc: 'img/job.svg',
+    imgSrc: 'img/job.png',
     name: 'Job',
     role: 'The Righteous Sufferer',
     teaser: 'A man of unmatched integrity who refuses to stay silent — and whose honest wrestling God calls more righteous than polished orthodoxy.',
@@ -26,7 +26,7 @@ const characters = [
   },
   {
     id: 'eliphaz',
-    imgSrc: 'img/eliphaz.svg',
+    imgSrc: 'img/eliphaz.png',
     name: 'Eliphaz',
     role: 'The Experiential Retributionist',
     teaser: 'The most sophisticated of the three friends — appeals to mystical experience and observation. "I have seen: no innocent person perishes."',
@@ -45,7 +45,7 @@ const characters = [
   },
   {
     id: 'bildad',
-    imgSrc: 'img/bildad.svg',
+    imgSrc: 'img/bildad.png',
     name: 'Bildad',
     role: 'The Traditionalist',
     teaser: '"Ask the former generations" — what the ancestors believed must be true, and the ancestors say the wicked suffer.',
@@ -64,7 +64,7 @@ const characters = [
   },
   {
     id: 'zophar',
-    imgSrc: 'img/zophar.svg',
+    imgSrc: 'img/zophar.png',
     name: 'Zophar',
     role: 'The Dogmatist',
     teaser: 'The harshest of the three — no appeals to experience or tradition, just blunt assertion. Job deserves worse than he is getting.',
@@ -83,7 +83,7 @@ const characters = [
   },
   {
     id: 'elihu',
-    imgSrc: 'img/elihu.svg',
+    imgSrc: 'img/elihu.png',
     name: 'Elihu',
     role: 'The Mediator',
     teaser: 'The young man who waits — and then advances the theology further than anyone. Not rebuked by God. A step toward the truth.',
@@ -102,7 +102,7 @@ const characters = [
   },
   {
     id: 'god',
-    imgSrc: 'img/god.svg',
+    imgSrc: 'img/god.png',
     name: 'God (Yahweh)',
     role: 'The Sovereign Creator',
     teaser: 'His answer is not an explanation — it is an encounter. "Where were you when I laid the foundation of the earth?"',
@@ -122,7 +122,7 @@ const characters = [
   },
   {
     id: 'satan',
-    imgSrc: 'img/satan.svg',
+    imgSrc: 'img/satan.png',
     name: 'Satan',
     role: 'The Cynical Accuser',
     teaser: '"Does Job fear God for nothing?" — The adversary\'s challenge is the engine of the entire book. The narrative proves him catastrophically wrong.',
