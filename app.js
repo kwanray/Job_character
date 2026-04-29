@@ -451,10 +451,10 @@ function initChat() {
     if (e.key === 'Escape' && sidebar.classList.contains('open')) closeChatSidebar();
   });
 
-  // API key save
+  // API key save — accept any sk- prefix (Anthropic format)
   apiSave.addEventListener('click', () => {
     const key = apiInput.value.trim();
-    if (!key.startsWith('sk-ant-')) {
+    if (!key.startsWith('sk-')) {
       apiInput.classList.add('invalid');
       return;
     }
@@ -615,56 +615,85 @@ async function callClaudeStream(messages, onChunk, onDone, onError) {
   const key = sessionStorage.getItem('job_chat_key');
   if (!key) { onError('No API key found. Please enter your Anthropic API key below.'); return; }
 
-  try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': key,
-        'anthropic-version': '2023-06-01',
-        'anthropic-dangerous-allow-browser': 'true'
-      },
-      body: JSON.stringify({
-        model: 'claude-haiku-4-5-20251001',
-        max_tokens: 1024,
-        system: CHAT_SYSTEM_PROMPT,
-        messages: messages,
-        stream: true
-      })
-    });
+  // Try newer model first, fall back to stable 3.5 Haiku if unavailable
+  const modelsToTry = ['claude-haiku-4-5-20251001', 'claude-3-5-haiku-20241022'];
+
+  for (let attempt = 0; attempt < modelsToTry.length; attempt++) {
+    const model = modelsToTry[attempt];
+    let response;
+
+    try {
+      response = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': key,
+          'anthropic-version': '2023-06-01',
+          'anthropic-dangerous-allow-browser': 'true'
+        },
+        body: JSON.stringify({
+          model,
+          max_tokens: 1024,
+          system: CHAT_SYSTEM_PROMPT,
+          messages,
+          stream: true
+        })
+      });
+    } catch (netErr) {
+      // fetch() itself threw — almost always a CORS or network error
+      onError(
+        'Could not reach the Anthropic API. ' +
+        'If you opened this page as a file:// URL, try running it through a local server instead ' +
+        '(e.g. run: npx serve . in the project folder). ' +
+        'Otherwise check your internet connection.'
+      );
+      return;
+    }
+
+    // Model not found on this tier — try the next one
+    if (response.status === 404 && attempt < modelsToTry.length - 1) continue;
 
     if (!response.ok) {
       const err = await response.json().catch(() => ({}));
-      const msg = err.error?.message || `API error (${response.status})`;
-      if (response.status === 401) throw new Error('Invalid API key. Please check and re-enter it.');
-      if (response.status === 429) throw new Error('Rate limit reached. Please wait a moment and try again.');
-      throw new Error(msg);
-    }
-
-    const reader = response.body.getReader();
-    const decoder = new TextDecoder();
-    let buffer = '';
-
-    while (true) {
-      const { done, value } = await reader.read();
-      if (done) break;
-      buffer += decoder.decode(value, { stream: true });
-      const lines = buffer.split('\n');
-      buffer = lines.pop() || '';
-      for (const line of lines) {
-        if (!line.startsWith('data: ')) continue;
-        const data = line.slice(6).trim();
-        if (data === '[DONE]') continue;
-        try {
-          const ev = JSON.parse(data);
-          if (ev.type === 'content_block_delta' && ev.delta?.type === 'text_delta') {
-            onChunk(ev.delta.text);
-          }
-        } catch (_) {}
+      const apiMsg = err.error?.message || '';
+      if (response.status === 401) {
+        onError('Invalid API key — please clear the key and re-enter it (the key must start with sk-ant-).');
+      } else if (response.status === 429) {
+        onError('Rate limit reached. Please wait a moment and try again.');
+      } else {
+        onError(apiMsg || `Anthropic API error (HTTP ${response.status}). Please try again.`);
       }
+      return;
     }
-    onDone();
-  } catch (err) {
-    onError(err.message || 'Network error. Please check your connection and try again.');
+
+    // Stream the response
+    try {
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder();
+      let buffer = '';
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        buffer += decoder.decode(value, { stream: true });
+        const lines = buffer.split('\n');
+        buffer = lines.pop() || '';
+        for (const line of lines) {
+          if (!line.startsWith('data: ')) continue;
+          const data = line.slice(6).trim();
+          if (data === '[DONE]') continue;
+          try {
+            const ev = JSON.parse(data);
+            if (ev.type === 'content_block_delta' && ev.delta?.type === 'text_delta') {
+              onChunk(ev.delta.text);
+            }
+          } catch (_) {}
+        }
+      }
+      onDone();
+    } catch (streamErr) {
+      onError('Connection interrupted while streaming. Please try again.');
+    }
+    return; // done — don't try next model
   }
 }
