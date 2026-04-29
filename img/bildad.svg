@@ -1,61 +1,90 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 220">
   <defs>
-    <radialGradient id="bg" cx="50%" cy="40%" r="60%">
+    <radialGradient id="bg" cx="50%" cy="30%" r="70%">
       <stop offset="0%" stop-color="#1e1408"/>
       <stop offset="100%" stop-color="#080602"/>
     </radialGradient>
+    <radialGradient id="face" cx="42%" cy="36%" r="58%">
+      <stop offset="0%" stop-color="#c48858"/>
+      <stop offset="70%" stop-color="#b47848"/>
+      <stop offset="100%" stop-color="#906030"/>
+    </radialGradient>
   </defs>
-  <rect width="200" height="200" rx="16" fill="url(#bg)"/>
+  <rect width="200" height="220" fill="url(#bg)"/>
 
-  <!-- Formal robe — ochre/terracotta with trim -->
-  <path d="M0 200L0 152Q50 140Q100 146Q150 140Q200 152L200 200Z" fill="#8b5e2a"/>
-  <path d="M76 146Q100 151Q124 146" stroke="#c09050" stroke-width="2" fill="none"/>
+  <!-- Formal terracotta robe with gold detail -->
+  <path d="M0 220L0 186Q30 172 100 176Q170 172 200 186L200 220Z" fill="#8b5e2a"/>
+  <path d="M50 176Q100 182Q150 176" stroke="#c09050" stroke-width="2.5" fill="none"/>
 
   <!-- Neck -->
-  <ellipse cx="100" cy="139" rx="15" ry="12" fill="#b07848"/>
+  <ellipse cx="100" cy="176" rx="24" ry="16" fill="#b47848"/>
 
-  <!-- Face — rounder, authoritative -->
-  <ellipse cx="100" cy="97" rx="43" ry="46" fill="#b07848"/>
+  <!-- Ears -->
+  <ellipse cx="19" cy="110" rx="12" ry="16" fill="#a86838"/>
+  <ellipse cx="181" cy="110" rx="12" ry="16" fill="#a86838"/>
 
-  <!-- Hair — grey, neat, formal -->
-  <path d="M59 92Q56 64Q68 48Q84 36Q100 32Q116 34Q132 42Q146 57Q148 86Q146 96Q140 70Q128 55Q112 48Q100 46Q86 47Q72 56Q62 74Q59 92Z" fill="#888070"/>
-  <path d="M59 92Q55 108Q58 124Q66 140" stroke="#706860" stroke-width="3" fill="none" stroke-linecap="round"/>
-  <path d="M141 92Q145 108Q142 124Q134 140" stroke="#706860" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <!-- Face — strong, authoritative -->
+  <ellipse cx="100" cy="112" rx="82" ry="88" fill="url(#face)"/>
+  <!-- Firm jaw shadow -->
+  <ellipse cx="100" cy="148" rx="60" ry="25" fill="#905028" opacity="0.2"/>
+
+  <!-- Neat grey hair — close-cropped at sides, fuller on top -->
+  <path d="M18 116Q16 78Q24 52Q40 30Q58 14Q78 6Q100 3Q122 6Q142 14Q160 30Q176 52Q184 78Q182 116Q172 84Q158 60Q136 48Q118 42Q100 40Q82 42Q64 48Q42 60Q28 84Q18 116Z" fill="#888070"/>
+  <!-- Side hair neat, close -->
+  <path d="M18 116Q14 138Q16 162Q24 182" stroke="#787060" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <path d="M182 116Q186 138Q184 162Q176 182" stroke="#787060" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <!-- Hair texture strands -->
+  <path d="M26 106Q20 86Q24 66" stroke="#706860" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M174 106Q180 86Q176 66" stroke="#706860" stroke-width="2" fill="none" stroke-linecap="round"/>
 
   <!-- Eyebrows — heavy, set, authoritative -->
-  <path d="M71 84Q82 79Q91 82" stroke="#504838" stroke-width="3" stroke-linecap="round" fill="none"/>
-  <path d="M109 82Q118 79Q129 84" stroke="#504838" stroke-width="3" stroke-linecap="round" fill="none"/>
+  <path d="M42 84Q60 76Q78 81" stroke="#504838" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+  <path d="M122 81Q140 76Q158 84" stroke="#504838" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+  <!-- Inner brow shadow for depth -->
+  <path d="M42 84Q60 80Q78 84" stroke="#302820" stroke-width="2" fill="none" opacity="0.5"/>
+  <path d="M122 84Q140 80Q158 84" stroke="#302820" stroke-width="2" fill="none" opacity="0.5"/>
 
-  <!-- Left eye — steady, serious -->
-  <ellipse cx="83" cy="96" rx="10.5" ry="11" fill="#ece8dc"/>
-  <ellipse cx="83" cy="95" rx="7" ry="7.5" fill="#4a3828"/>
-  <circle cx="83" cy="95" r="4.5" fill="#18100a"/>
-  <circle cx="86" cy="92" r="1.6" fill="white"/>
-  <path d="M72 95Q83 89Q94 95" stroke="#504838" stroke-width="1.8" fill="none" stroke-linecap="round"/>
-  <path d="M73 97Q83 103Q93 97" stroke="#907858" stroke-width="1" fill="none" stroke-linecap="round"/>
+  <!-- LEFT EYE — steady, serious, authoritative -->
+  <ellipse cx="66" cy="100" rx="18" ry="18" fill="#eee8dc"/>
+  <ellipse cx="66" cy="98" rx="12.5" ry="13" fill="#4a3828"/>
+  <circle cx="66" cy="98" r="8.5" fill="#18100a"/>
+  <circle cx="71" cy="93" r="3" fill="white"/>
+  <circle cx="63" cy="104" r="1.3" fill="white" opacity="0.4"/>
+  <path d="M48 99Q66 89Q84 99" stroke="#302820" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M49 102Q66 112Q83 102" stroke="#907858" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <path d="M50 98Q47 93" stroke="#302820" stroke-width="2" stroke-linecap="round" fill="none"/>
+  <path d="M60 92Q58 87" stroke="#302820" stroke-width="2" stroke-linecap="round" fill="none"/>
+  <path d="M66 90Q66 85" stroke="#302820" stroke-width="2" stroke-linecap="round" fill="none"/>
+  <path d="M73 92Q75 87" stroke="#302820" stroke-width="2" stroke-linecap="round" fill="none"/>
+  <path d="M82 98Q85 93" stroke="#302820" stroke-width="2" stroke-linecap="round" fill="none"/>
 
-  <!-- Right eye -->
-  <ellipse cx="117" cy="96" rx="10.5" ry="11" fill="#ece8dc"/>
-  <ellipse cx="117" cy="95" rx="7" ry="7.5" fill="#4a3828"/>
-  <circle cx="117" cy="95" r="4.5" fill="#18100a"/>
-  <circle cx="120" cy="92" r="1.6" fill="white"/>
-  <path d="M106 95Q117 89Q128 95" stroke="#504838" stroke-width="1.8" fill="none" stroke-linecap="round"/>
-  <path d="M107 97Q117 103Q127 97" stroke="#907858" stroke-width="1" fill="none" stroke-linecap="round"/>
+  <!-- RIGHT EYE -->
+  <ellipse cx="134" cy="100" rx="18" ry="18" fill="#eee8dc"/>
+  <ellipse cx="134" cy="98" rx="12.5" ry="13" fill="#4a3828"/>
+  <circle cx="134" cy="98" r="8.5" fill="#18100a"/>
+  <circle cx="139" cy="93" r="3" fill="white"/>
+  <circle cx="131" cy="104" r="1.3" fill="white" opacity="0.4"/>
+  <path d="M116 99Q134 89Q152 99" stroke="#302820" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M117 102Q134 112Q151 102" stroke="#907858" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <path d="M118 98Q115 93" stroke="#302820" stroke-width="2" stroke-linecap="round" fill="none"/>
+  <path d="M127 92Q125 87" stroke="#302820" stroke-width="2" stroke-linecap="round" fill="none"/>
+  <path d="M134 90Q134 85" stroke="#302820" stroke-width="2" stroke-linecap="round" fill="none"/>
+  <path d="M141 92Q143 87" stroke="#302820" stroke-width="2" stroke-linecap="round" fill="none"/>
+  <path d="M150 98Q153 93" stroke="#302820" stroke-width="2" stroke-linecap="round" fill="none"/>
 
-  <!-- Nose -->
-  <path d="M97 109Q100 113Q103 109" stroke="#906040" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <!-- Nose — solid, prominent -->
+  <path d="M95 120Q100 130Q105 120" stroke="#906040" stroke-width="2.5" fill="none" stroke-linecap="round"/>
 
-  <!-- Mouth — firm, set -->
-  <path d="M87 121Q100 119Q113 121" stroke="#7a5030" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <!-- Mouth — firm, set line -->
+  <path d="M78 142Q100 139Q122 142" stroke="#7a5030" stroke-width="3" fill="none" stroke-linecap="round"/>
 
-  <!-- Beard — grey, neat, trimmed -->
-  <path d="M62 113Q62 129Q66 143Q76 155Q100 161Q124 155Q134 143Q138 129Q138 113Q130 121Q118 127Q108 130Q100 131Q92 130Q82 127Q70 121Q62 113Z" fill="#888070"/>
-  <path d="M82 123Q80 137Q82 149" stroke="#707060" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-  <path d="M100 125Q100 139Q100 151" stroke="#707060" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-  <path d="M118 123Q120 137Q118 149" stroke="#707060" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <!-- Neat grey beard — well-groomed, shorter than Eliphaz -->
+  <path d="M20 128Q18 150Q22 170Q36 192Q62 208Q100 214Q138 208Q164 192Q178 170Q182 150Q180 128Q166 144Q148 154Q126 160Q100 162Q74 160Q52 154Q34 144Q20 128Z" fill="#888070"/>
+  <path d="M52 146Q48 168Q52 186" stroke="#707060" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M100 156Q100 178Q100 196" stroke="#707060" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M148 146Q152 168Q148 186" stroke="#707060" stroke-width="2.5" fill="none" stroke-linecap="round"/>
 
-  <!-- Scroll visible at lower edge -->
-  <ellipse cx="152" cy="172" rx="7" ry="12" fill="#d4b870" opacity="0.55"/>
-  <line x1="148" y1="164" x2="156" y2="164" stroke="#c09860" stroke-width="1" opacity="0.55"/>
-  <line x1="148" y1="180" x2="156" y2="180" stroke="#c09860" stroke-width="1" opacity="0.55"/>
+  <!-- Scroll hint at lower edge -->
+  <ellipse cx="162" cy="200" rx="10" ry="18" fill="#d4b870" opacity="0.5"/>
+  <line x1="155" y1="188" x2="169" y2="188" stroke="#c09860" stroke-width="1.5" opacity="0.5"/>
 </svg>

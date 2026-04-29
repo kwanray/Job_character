@@ -1,60 +1,83 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 220">
   <defs>
-    <radialGradient id="bg" cx="50%" cy="40%" r="60%">
+    <radialGradient id="bg" cx="50%" cy="30%" r="70%">
       <stop offset="0%" stop-color="#1a1030"/>
       <stop offset="100%" stop-color="#060410"/>
     </radialGradient>
+    <radialGradient id="face" cx="40%" cy="35%" r="60%">
+      <stop offset="0%" stop-color="#dfc4a0"/>
+      <stop offset="70%" stop-color="#d0b08a"/>
+      <stop offset="100%" stop-color="#b89060"/>
+    </radialGradient>
   </defs>
-  <rect width="200" height="200" rx="16" fill="url(#bg)"/>
+  <rect width="200" height="220" fill="url(#bg)"/>
 
-  <!-- Purple robe with gold trim -->
-  <path d="M0 200L0 150Q50 138Q100 143Q150 138Q200 150L200 200Z" fill="#5a3878"/>
-  <path d="M70 143Q100 149Q130 143" stroke="#c8a820" stroke-width="2" fill="none"/>
+  <!-- Rich purple robe -->
+  <path d="M0 220L0 188Q30 174 100 178Q170 174 200 188L200 220Z" fill="#5a3878"/>
+  <path d="M50 178Q100 184Q150 178" stroke="#c8a820" stroke-width="2.5" fill="none"/>
 
   <!-- Neck -->
-  <ellipse cx="100" cy="138" rx="15" ry="11" fill="#d4b890"/>
+  <ellipse cx="100" cy="178" rx="22" ry="16" fill="#d0b08a"/>
 
-  <!-- Face — elder, longer -->
-  <ellipse cx="100" cy="96" rx="42" ry="48" fill="#d4b890"/>
+  <!-- Ears -->
+  <ellipse cx="19" cy="110" rx="12" ry="16" fill="#c4a070"/>
+  <ellipse cx="181" cy="110" rx="12" ry="16" fill="#c4a070"/>
 
-  <!-- Hair — full flowing white -->
-  <path d="M60 90Q56 62Q68 46Q84 32Q100 28Q116 30Q132 38Q146 54Q148 82Q146 94Q140 70Q128 54Q112 46Q100 44Q86 45Q72 54Q62 72Q60 90Z" fill="#e8e0d0"/>
-  <path d="M60 90Q54 106Q52 122Q58 138Q66 152" stroke="#d0c8b8" stroke-width="3" fill="none" stroke-linecap="round"/>
-  <path d="M140 90Q146 106Q148 122Q142 138Q134 152" stroke="#d0c8b8" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <!-- Face — large, elder proportions, slightly longer -->
+  <ellipse cx="100" cy="112" rx="80" ry="90" fill="url(#face)"/>
+  <!-- Age shadow on temples -->
+  <ellipse cx="30" cy="108" rx="20" ry="28" fill="#b08060" opacity="0.25"/>
+  <ellipse cx="170" cy="108" rx="20" ry="28" fill="#b08060" opacity="0.25"/>
 
-  <!-- Eyebrows — arched, wise, one slightly raised -->
-  <path d="M72 83Q82 77Q90 80" stroke="#907860" stroke-width="2" stroke-linecap="round" fill="none"/>
-  <path d="M110 79Q119 76Q128 81" stroke="#907860" stroke-width="2" stroke-linecap="round" fill="none"/>
+  <!-- Long flowing white hair — sweeps to sides -->
+  <path d="M20 118Q16 80Q24 54Q38 30Q58 14Q76 6Q100 2Q124 6Q142 14Q162 30Q176 54Q184 80Q180 118Q168 84Q154 60Q132 46Q116 40Q100 38Q84 40Q68 46Q46 60Q32 84Q20 118Z" fill="#e8e0d2"/>
+  <!-- Hair flowing down sides -->
+  <path d="M20 118Q12 144Q14 170Q22 192" stroke="#dcd4c8" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <path d="M180 118Q188 144Q186 170Q178 192" stroke="#dcd4c8" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <!-- Hair texture strands -->
+  <path d="M28 110Q22 90Q26 70" stroke="#ccc4b8" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M172 110Q178 90Q174 70" stroke="#ccc4b8" stroke-width="2.5" fill="none" stroke-linecap="round"/>
 
-  <!-- Left eye — hooded, knowing -->
-  <ellipse cx="83" cy="94" rx="10" ry="10" fill="#f4eee4"/>
-  <path d="M73 90Q83 84Q93 90Q89 94Q77 94Z" fill="#d4b890"/>
-  <ellipse cx="83" cy="94" rx="6.5" ry="7" fill="#4a3020"/>
-  <circle cx="83" cy="94" r="4.5" fill="#140c04"/>
-  <circle cx="86" cy="91" r="1.6" fill="white"/>
-  <path d="M73 94Q83 100Q93 94" stroke="#907860" stroke-width="1" fill="none" stroke-linecap="round"/>
+  <!-- Eyebrows — arched, one notably higher (wise, slightly skeptical) -->
+  <path d="M44 84Q60 76Q76 80" stroke="#907860" stroke-width="3" stroke-linecap="round" fill="none"/>
+  <path d="M124 78Q142 73Q158 80" stroke="#907860" stroke-width="3" stroke-linecap="round" fill="none"/>
 
-  <!-- Right eye -->
-  <ellipse cx="117" cy="94" rx="10" ry="10" fill="#f4eee4"/>
-  <path d="M107 90Q117 84Q127 90Q123 94Q111 94Z" fill="#d4b890"/>
-  <ellipse cx="117" cy="94" rx="6.5" ry="7" fill="#4a3020"/>
-  <circle cx="117" cy="94" r="4.5" fill="#140c04"/>
-  <circle cx="120" cy="91" r="1.6" fill="white"/>
-  <path d="M107 94Q117 100Q127 94" stroke="#907860" stroke-width="1" fill="none" stroke-linecap="round"/>
+  <!-- LEFT EYE — hooded, knowing (partially covered by lid) -->
+  <ellipse cx="66" cy="98" rx="17" ry="17" fill="#f0e8dc"/>
+  <!-- Heavy upper eyelid — hooded elder look -->
+  <path d="M49 94Q66 84Q83 94Q80 100Q70 103Q62 103Q52 100Z" fill="#d0b08a"/>
+  <ellipse cx="66" cy="99" rx="11" ry="12" fill="#4a3020"/>
+  <circle cx="66" cy="99" r="7.5" fill="#180c04"/>
+  <circle cx="71" cy="94" r="2.8" fill="white"/>
+  <circle cx="63" cy="104" r="1.2" fill="white" opacity="0.4"/>
+  <!-- Lower lid -->
+  <path d="M49 100Q66 110Q83 100" stroke="#a08060" stroke-width="1.5" fill="none" stroke-linecap="round"/>
 
-  <!-- Nose — prominent, elder -->
-  <path d="M96 108Q100 115Q104 108" stroke="#b09070" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <!-- RIGHT EYE — hooded, knowing -->
+  <ellipse cx="134" cy="98" rx="17" ry="17" fill="#f0e8dc"/>
+  <path d="M117 94Q134 84Q151 94Q148 100Q138 103Q130 103Q120 100Z" fill="#d0b08a"/>
+  <ellipse cx="134" cy="99" rx="11" ry="12" fill="#4a3020"/>
+  <circle cx="134" cy="99" r="7.5" fill="#180c04"/>
+  <circle cx="139" cy="94" r="2.8" fill="white"/>
+  <circle cx="131" cy="104" r="1.2" fill="white" opacity="0.4"/>
+  <path d="M117 100Q134 110Q151 100" stroke="#a08060" stroke-width="1.5" fill="none" stroke-linecap="round"/>
 
-  <!-- Mouth — thin, knowing half-smile -->
-  <path d="M88 121Q100 119Q112 121" stroke="#907060" stroke-width="2" fill="none" stroke-linecap="round"/>
-  <path d="M111 121Q113 118" stroke="#907060" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+  <!-- Nose — longer, more prominent for elder -->
+  <path d="M95 118Q100 128Q105 118" stroke="#b09070" stroke-width="2.5" fill="none" stroke-linecap="round"/>
 
-  <!-- Long flowing white beard -->
-  <path d="M60 113Q58 132Q60 150Q70 166Q84 176Q100 180Q116 176Q130 166Q140 150Q142 132Q140 113Q132 124Q118 132Q108 136Q100 138Q92 136Q82 132Q68 124Q60 113Z" fill="#e8e0d0"/>
-  <path d="M80 126Q76 144Q78 162" stroke="#ccc4b4" stroke-width="2" fill="none" stroke-linecap="round"/>
-  <path d="M100 130Q100 149Q100 167" stroke="#ccc4b4" stroke-width="2" fill="none" stroke-linecap="round"/>
-  <path d="M120 126Q124 144Q122 162" stroke="#ccc4b4" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <!-- Mouth — thin, knowing half-smile at one corner -->
+  <path d="M78 136Q100 133Q122 136" stroke="#907060" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M122 136Q125 132" stroke="#907060" stroke-width="2" stroke-linecap="round" fill="none"/>
 
-  <!-- Subtle mystical glow -->
-  <ellipse cx="100" cy="80" rx="52" ry="58" fill="none" stroke="#8050b0" stroke-width="0.8" opacity="0.2"/>
+  <!-- Long flowing white beard — very prominent -->
+  <path d="M22 128Q20 152Q22 176Q34 202Q60 218Q100 224Q140 218Q166 202Q178 176Q180 152Q178 128Q164 146Q146 156Q124 162Q100 164Q76 162Q54 156Q36 146Q22 128Z" fill="#e8e0d2"/>
+  <!-- Beard texture — flowing lines -->
+  <path d="M50 144Q46 168Q50 190" stroke="#d0c8bc" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M100 158Q100 182Q100 204" stroke="#d0c8bc" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M150 144Q154 168Q150 190" stroke="#d0c8bc" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M72 152Q70 176Q74 196" stroke="#c8c0b4" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <path d="M128 152Q130 176Q126 196" stroke="#c8c0b4" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+
+  <!-- Faint prophetic glow around head -->
+  <ellipse cx="100" cy="90" rx="86" ry="96" fill="none" stroke="#8050b8" stroke-width="1" opacity="0.18"/>
 </svg>

@@ -1,62 +1,91 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 220">
   <defs>
-    <radialGradient id="bg" cx="50%" cy="35%" r="60%">
-      <stop offset="0%" stop-color="#0a0a1c"/>
-      <stop offset="100%" stop-color="#030308"/>
+    <radialGradient id="bg" cx="50%" cy="35%" r="62%">
+      <stop offset="0%" stop-color="#0c0c26"/>
+      <stop offset="100%" stop-color="#030310"/>
     </radialGradient>
-    <radialGradient id="faceGlow" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#28284a"/>
-      <stop offset="100%" stop-color="#10103a" stop-opacity="0"/>
+    <radialGradient id="face" cx="44%" cy="36%" r="60%">
+      <stop offset="0%" stop-color="#2e2e5e"/>
+      <stop offset="65%" stop-color="#22224c"/>
+      <stop offset="100%" stop-color="#16163a"/>
     </radialGradient>
   </defs>
-  <rect width="200" height="200" rx="16" fill="url(#bg)"/>
+  <rect width="200" height="220" fill="url(#bg)"/>
 
-  <!-- Hooded formal robe — dark blue-black -->
-  <path d="M20 200L20 135Q28 105Q50 88Q100 80Q150 88Q172 105Q180 135L180 200Z" fill="#0c0c24"/>
-  <!-- Hood cast in deeper shadow -->
-  <path d="M52 92Q70 68Q100 62Q130 68Q148 92Q140 76Q100 70Q60 76Q52 92Z" fill="#06061a"/>
-  <!-- Cloak folds -->
-  <path d="M50 140Q45 160Q50 180" stroke="#12122e" stroke-width="2" fill="none"/>
-  <path d="M150 140Q155 160Q150 180" stroke="#12122e" stroke-width="2" fill="none"/>
+  <!-- Dark cloak at bottom -->
+  <path d="M0 220L0 184Q30 170 100 174Q170 170 200 184L200 220Z" fill="#08081c"/>
+  <path d="M50 174Q100 180Q150 174" stroke="#14143a" stroke-width="2" fill="none"/>
 
-  <!-- Neck in shadow -->
-  <ellipse cx="100" cy="132" rx="18" ry="14" fill="#18183c"/>
+  <!-- Neck — deep shadow -->
+  <ellipse cx="100" cy="174" rx="22" ry="15" fill="#181840"/>
 
-  <!-- Face — partially shadowed, prosecutorial bearing -->
-  <ellipse cx="100" cy="102" rx="36" ry="38" fill="#22224a"/>
-  <!-- Deep shadow over upper face from hood -->
-  <path d="M64 90Q80 78Q100 74Q120 78Q136 90Q130 86Q115 82Q100 80Q85 82Q70 86Q64 90Z" fill="#06061a"/>
+  <!-- Ears — barely visible in shadow -->
+  <ellipse cx="20" cy="110" rx="12" ry="15" fill="#1e1e46"/>
+  <ellipse cx="180" cy="110" rx="12" ry="15" fill="#1e1e46"/>
 
-  <!-- Left eye — cold, calculating glint in shadow -->
-  <ellipse cx="85" cy="98" rx="8" ry="7" fill="#1a1a38"/>
-  <ellipse cx="85" cy="98" rx="5" ry="5" fill="#242454"/>
-  <circle cx="85" cy="98" r="3.2" fill="#0e0e28"/>
-  <circle cx="87" cy="96" r="1.1" fill="#7080c8" opacity="0.75"/>
+  <!-- Face — fills frame, deep indigo -->
+  <ellipse cx="100" cy="112" rx="80" ry="85" fill="url(#face)"/>
 
-  <!-- Right eye -->
-  <ellipse cx="115" cy="98" rx="8" ry="7" fill="#1a1a38"/>
-  <ellipse cx="115" cy="98" rx="5" ry="5" fill="#242454"/>
-  <circle cx="115" cy="98" r="3.2" fill="#0e0e28"/>
-  <circle cx="117" cy="96" r="1.1" fill="#7080c8" opacity="0.75"/>
+  <!-- Angular jaw/cheek shadow — sunken, predatory -->
+  <ellipse cx="68" cy="132" rx="20" ry="15" fill="#101030" opacity="0.45"/>
+  <ellipse cx="132" cy="132" rx="20" ry="15" fill="#101030" opacity="0.45"/>
+  <ellipse cx="100" cy="155" rx="58" ry="20" fill="#101030" opacity="0.30"/>
 
-  <!-- Nose — barely visible -->
-  <path d="M98 108Q100 112Q102 108" stroke="#36366a" stroke-width="1" fill="none" stroke-linecap="round"/>
+  <!-- Deep hood shadow over upper forehead — hood casts from above -->
+  <path d="M20 115Q18 86Q26 62Q40 42Q58 28Q80 18Q100 14Q120 18Q142 28Q160 42Q174 62Q182 86Q180 115Q172 88Q158 66Q138 52Q118 44Q100 42Q82 44Q62 52Q42 66Q28 88Q20 115Z" fill="#06061a"/>
+  <!-- Forehead shadow band -->
+  <ellipse cx="100" cy="70" rx="80" ry="28" fill="#060618" opacity="0.75"/>
 
-  <!-- Mouth — thin, slight satisfied curl — the smug accuser -->
-  <path d="M88 120Q100 118Q112 120" stroke="#44448a" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-  <path d="M112 120Q115 117" stroke="#44448a" stroke-width="1.2" stroke-linecap="round" fill="none"/>
-  <path d="M88 120Q85 117" stroke="#44448a" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+  <!-- EYEBROWS — sharply angled, inner corners raised — sardonic, menacing -->
+  <path d="M44 88Q62 78Q80 86" stroke="#2e2e7a" stroke-width="4" stroke-linecap="round" fill="none"/>
+  <path d="M120 86Q138 78Q156 88" stroke="#2e2e7a" stroke-width="4" stroke-linecap="round" fill="none"/>
+  <!-- Inner brow crease — V-shape of contempt -->
+  <path d="M80 86Q88 80Q96 85" stroke="#2e2e7a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M104 85Q112 80Q120 86" stroke="#2e2e7a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
 
-  <!-- Scales of justice / balance — the heavenly court accuser -->
-  <line x1="100" y1="152" x2="100" y2="164" stroke="#3a3a72" stroke-width="2"/>
-  <line x1="62" y1="164" x2="138" y2="164" stroke="#3a3a72" stroke-width="1.8"/>
-  <!-- Left pan (tilted slightly — accusation weighing down) -->
-  <path d="M62 164Q70 170Q78 164" stroke="#3a3a72" stroke-width="1.5" fill="none"/>
-  <!-- Right pan -->
-  <path d="M122 164Q130 171Q138 164" stroke="#3a3a72" stroke-width="1.5" fill="none"/>
-  <!-- Pivot circle -->
-  <circle cx="100" cy="152" r="3" fill="#5050a0" opacity="0.65"/>
+  <!-- LEFT EYE — large, cold, piercing blue-white glints -->
+  <ellipse cx="66" cy="102" rx="17" ry="14" fill="#1e1e48"/>
+  <!-- Upper eyelid shadow — heavy but eye still clearly open -->
+  <path d="M49 98Q66 87Q83 98Q81 104Q73 108Q59 108Q51 104Z" fill="#16163a" opacity="0.65"/>
+  <ellipse cx="66" cy="102" rx="11" ry="10" fill="#26265c"/>
+  <circle cx="66" cy="102" r="7" fill="#0a0a24"/>
+  <!-- Prominent cold blue-white catchlights -->
+  <circle cx="71" cy="97" r="3.5" fill="#a0b0f0" opacity="0.95"/>
+  <circle cx="62" cy="108" r="1.6" fill="#7080d0" opacity="0.75"/>
+  <!-- Lower eyelid line -->
+  <path d="M50 104Q66 114Q82 104" stroke="#2a2a6a" stroke-width="1.5" fill="none" stroke-linecap="round"/>
 
-  <!-- The challenge — faint text -->
-  <text x="100" y="185" text-anchor="middle" font-size="6.5" fill="#3a3a6e" opacity="0.55" font-family="Georgia, serif" font-style="italic">Does Job fear God for nothing?</text>
+  <!-- RIGHT EYE — large, cold, piercing -->
+  <ellipse cx="134" cy="102" rx="17" ry="14" fill="#1e1e48"/>
+  <path d="M117 98Q134 87Q151 98Q149 104Q141 108Q127 108Q119 104Z" fill="#16163a" opacity="0.65"/>
+  <ellipse cx="134" cy="102" rx="11" ry="10" fill="#26265c"/>
+  <circle cx="134" cy="102" r="7" fill="#0a0a24"/>
+  <circle cx="139" cy="97" r="3.5" fill="#a0b0f0" opacity="0.95"/>
+  <circle cx="130" cy="108" r="1.6" fill="#7080d0" opacity="0.75"/>
+  <path d="M118 104Q134 114Q150 104" stroke="#2a2a6a" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+
+  <!-- Nose — angular, barely suggested -->
+  <path d="M96 122Q100 130Q104 122" stroke="#28286a" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+
+  <!-- Mouth — thin, corners lifted in smug satisfaction — the accuser who thinks he's won -->
+  <path d="M80 144Q100 140Q120 144" stroke="#3a3a8e" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+  <path d="M120 144Q125 138" stroke="#3a3a8e" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+  <path d="M80 144Q75 138"  stroke="#3a3a8e" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+
+  <!-- SCALES OF JUSTICE — the heavenly court's Accuser — prominent at bottom -->
+  <!-- Central pole -->
+  <line x1="100" y1="165" x2="100" y2="180" stroke="#4848b0" stroke-width="2.8"/>
+  <!-- Crossbeam -->
+  <line x1="52"  y1="180" x2="148" y2="180" stroke="#4848b0" stroke-width="2.4"/>
+  <!-- Left chain + pan — weighted down (accusation heavy) -->
+  <line x1="68"  y1="180" x2="62"  y2="192" stroke="#4848b0" stroke-width="1.6"/>
+  <path d="M50 192Q62 200Q74 192" stroke="#4848b0" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <!-- Right chain + pan — lighter (righteousness can't match the charge?) -->
+  <line x1="132" y1="180" x2="138" y2="188" stroke="#4848b0" stroke-width="1.6"/>
+  <path d="M126 188Q138 194Q150 188" stroke="#4848b0" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <!-- Pivot -->
+  <circle cx="100" cy="165" r="4.5" fill="#5858c0" opacity="0.80"/>
+
+  <!-- The accusation — faint text at very bottom -->
+  <text x="100" y="214" text-anchor="middle" font-size="6.5" fill="#3a3a80" opacity="0.70" font-family="Georgia, serif" font-style="italic">Does Job fear God for nothing?</text>
 </svg>

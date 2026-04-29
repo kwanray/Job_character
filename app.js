@@ -158,14 +158,12 @@ function renderCards() {
       role="button"
       aria-label="Explore ${char.name}"
     >
-      <div class="char-card-inner">
-        <div class="char-header">
-          <div class="char-avatar"><img src="${char.imgSrc}" alt="${char.name}" loading="lazy"></div>
-          <div class="char-names">
-            <div class="char-name">${char.name}</div>
-            <div class="char-role">${char.role}</div>
-          </div>
-        </div>
+      <div class="char-portrait">
+        <img src="${char.imgSrc}" alt="${char.name}" loading="lazy">
+      </div>
+      <div class="char-body">
+        <div class="char-name">${char.name}</div>
+        <div class="char-role">${char.role}</div>
         <p class="char-teaser">${char.teaser}</p>
         <div class="char-verdict-tag ${char.verdictClass}">${char.verdictText}</div>
       </div>

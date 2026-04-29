@@ -1,63 +1,82 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 220">
   <defs>
-    <radialGradient id="bg" cx="50%" cy="40%" r="60%">
+    <radialGradient id="bg" cx="50%" cy="30%" r="70%">
       <stop offset="0%" stop-color="#200808"/>
       <stop offset="100%" stop-color="#080202"/>
     </radialGradient>
+    <radialGradient id="face" cx="42%" cy="36%" r="58%">
+      <stop offset="0%" stop-color="#bc7848"/>
+      <stop offset="70%" stop-color="#a86840"/>
+      <stop offset="100%" stop-color="#844e28"/>
+    </radialGradient>
   </defs>
-  <rect width="200" height="200" rx="16" fill="url(#bg)"/>
+  <rect width="200" height="220" fill="url(#bg)"/>
 
-  <!-- Dark red robe -->
-  <path d="M0 200L0 152Q50 140Q100 146Q150 140Q200 152L200 200Z" fill="#6b1a1a"/>
-  <path d="M78 146Q100 150Q122 146" stroke="#8a2020" stroke-width="2" fill="none"/>
+  <!-- Dark crimson robe -->
+  <path d="M0 220L0 186Q30 172 100 176Q170 172 200 186L200 220Z" fill="#6b1a1a"/>
+  <path d="M50 176Q100 182Q150 176" stroke="#8a2828" stroke-width="2" fill="none"/>
 
   <!-- Neck -->
-  <ellipse cx="100" cy="139" rx="14" ry="11" fill="#a86840"/>
+  <ellipse cx="100" cy="176" rx="22" ry="15" fill="#a86840"/>
 
-  <!-- Face — slightly angular, gaunt -->
-  <ellipse cx="100" cy="97" rx="40" ry="46" fill="#a86840"/>
-  <!-- Hollow cheeks shadow -->
-  <ellipse cx="79" cy="110" rx="11" ry="8" fill="#7a4820" opacity="0.28"/>
-  <ellipse cx="121" cy="110" rx="11" ry="8" fill="#7a4820" opacity="0.28"/>
+  <!-- Ears -->
+  <ellipse cx="20" cy="108" rx="11" ry="15" fill="#9a6030"/>
+  <ellipse cx="180" cy="108" rx="11" ry="15" fill="#9a6030"/>
 
-  <!-- Hair — dark, severe, slicked back -->
-  <path d="M62 92Q60 62Q72 46Q86 36Q100 32Q114 34Q128 42Q142 56Q144 82Q142 96Q138 72Q126 58Q112 50Q100 48Q88 49Q74 58Q64 76Q62 92Z" fill="#18100a"/>
-  <path d="M62 92Q58 108Q60 124" stroke="#18100a" stroke-width="3" fill="none" stroke-linecap="round"/>
-  <path d="M138 92Q142 108Q140 124" stroke="#18100a" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <!-- Face — angular, slightly gaunt -->
+  <ellipse cx="100" cy="110" rx="80" ry="87" fill="url(#face)"/>
+  <!-- Hollow cheek shadows — gaunt look -->
+  <ellipse cx="68" cy="128" rx="20" ry="15" fill="#7a4020" opacity="0.32"/>
+  <ellipse cx="132" cy="128" rx="20" ry="15" fill="#7a4020" opacity="0.32"/>
+  <!-- Strong jaw shadow -->
+  <ellipse cx="100" cy="152" rx="54" ry="20" fill="#7a4020" opacity="0.22"/>
 
-  <!-- Eyebrows — low, severe, nearly meeting in middle -->
-  <path d="M70 85Q81 80Q90 83" stroke="#18100a" stroke-width="3" stroke-linecap="round" fill="none"/>
-  <path d="M110 83Q119 80Q130 85" stroke="#18100a" stroke-width="3" stroke-linecap="round" fill="none"/>
-  <path d="M92 83Q100 80Q108 83" stroke="#18100a" stroke-width="2" fill="none"/>
+  <!-- Hair — dark, severe, swept back tight -->
+  <path d="M20 114Q18 76Q26 50Q42 28Q60 14Q78 6Q100 2Q122 6Q140 14Q158 28Q174 50Q182 76Q180 114Q170 82Q158 58Q138 44Q118 38Q100 36Q82 38Q62 44Q42 58Q30 82Q20 114Z" fill="#18100a"/>
+  <!-- Clean, severe hairline -->
+  <path d="M20 114Q16 136Q18 158Q26 178" stroke="#18100a" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <path d="M180 114Q184 136Q182 158Q174 178" stroke="#18100a" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <!-- Hair drawn back tight — no strands sticking out -->
 
-  <!-- Left eye — narrow, critical -->
-  <ellipse cx="82" cy="96" rx="10" ry="8" fill="#ece4d8"/>
-  <!-- Heavy upper lid — narrow look -->
-  <path d="M72 92Q82 87Q92 92Q89 96Q75 96Z" fill="#a86840"/>
-  <ellipse cx="82" cy="96" rx="6" ry="5.5" fill="#3a2418"/>
-  <circle cx="82" cy="96" r="3.5" fill="#100804"/>
-  <circle cx="84.5" cy="93.5" r="1.2" fill="white"/>
-  <path d="M72 96Q82 101Q92 96" stroke="#7a5030" stroke-width="1" fill="none" stroke-linecap="round"/>
+  <!-- Eyebrows — very low, severe, almost meeting -->
+  <path d="M42 86Q60 78Q78 83" stroke="#18100a" stroke-width="5" stroke-linecap="round" fill="none"/>
+  <path d="M122 83Q140 78Q158 86" stroke="#18100a" stroke-width="5" stroke-linecap="round" fill="none"/>
+  <!-- Inner brow crease — disapproval -->
+  <path d="M82 83Q100 79Q118 83" stroke="#18100a" stroke-width="3" fill="none"/>
 
-  <!-- Right eye — narrow -->
-  <ellipse cx="118" cy="96" rx="10" ry="8" fill="#ece4d8"/>
-  <path d="M108 92Q118 87Q128 92Q125 96Q111 96Z" fill="#a86840"/>
-  <ellipse cx="118" cy="96" rx="6" ry="5.5" fill="#3a2418"/>
-  <circle cx="118" cy="96" r="3.5" fill="#100804"/>
-  <circle cx="120.5" cy="93.5" r="1.2" fill="white"/>
-  <path d="M108 96Q118 101Q128 96" stroke="#7a5030" stroke-width="1" fill="none" stroke-linecap="round"/>
+  <!-- LEFT EYE — NARROW, critical, half-lidded with heavy eyelid -->
+  <ellipse cx="66" cy="99" rx="18" ry="16" fill="#ece4d8"/>
+  <!-- Very heavy upper lid making eye look severely narrow -->
+  <path d="M48 95Q66 84Q84 95Q82 100Q74 105Q58 105Q50 100Z" fill="#a86840"/>
+  <ellipse cx="66" cy="99" rx="12" ry="10" fill="#3a2418"/>
+  <circle cx="66" cy="99" r="7" fill="#100804"/>
+  <circle cx="70" cy="95" r="2.4" fill="white"/>
+  <!-- Narrow lower line -->
+  <path d="M48 100Q66 107Q84 100" stroke="#7a5030" stroke-width="1.5" fill="none" stroke-linecap="round"/>
 
-  <!-- Nose — sharp, prominent -->
-  <path d="M98 109Q100 114Q102 109" stroke="#8a5028" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <!-- RIGHT EYE — NARROW -->
+  <ellipse cx="134" cy="99" rx="18" ry="16" fill="#ece4d8"/>
+  <path d="M116 95Q134 84Q152 95Q150 100Q142 105Q126 105Q118 100Z" fill="#a86840"/>
+  <ellipse cx="134" cy="99" rx="12" ry="10" fill="#3a2418"/>
+  <circle cx="134" cy="99" r="7" fill="#100804"/>
+  <circle cx="138" cy="95" r="2.4" fill="white"/>
+  <path d="M116 100Q134 107Q152 100" stroke="#7a5030" stroke-width="1.5" fill="none" stroke-linecap="round"/>
 
-  <!-- Mouth — tight, disapproving, corners down -->
-  <path d="M87 122Q100 120Q113 122" stroke="#6a3018" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-  <path d="M87 122Q85 125" stroke="#6a3018" stroke-width="1.5" stroke-linecap="round" fill="none"/>
-  <path d="M113 122Q115 125" stroke="#6a3018" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+  <!-- Nose — sharp, prominent, slightly hooked -->
+  <path d="M96 120Q100 130Q104 120" stroke="#8a5028" stroke-width="2.5" fill="none" stroke-linecap="round"/>
 
-  <!-- Short, dark, neat beard -->
-  <path d="M66 113Q66 126Q70 139Q80 149Q100 155Q120 149Q130 139Q134 126Q134 113Q126 120Q114 125Q106 127Q100 128Q94 127Q86 125Q74 120Q66 113Z" fill="#18100a"/>
+  <!-- Mouth — tight, lips pressed together, corners down — contempt -->
+  <path d="M78 142Q100 139Q122 142" stroke="#6a3018" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+  <path d="M78 142Q74 147" stroke="#6a3018" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+  <path d="M122 142Q126 147" stroke="#6a3018" stroke-width="2.5" stroke-linecap="round" fill="none"/>
 
-  <!-- Pointing finger at lower edge -->
-  <path d="M145 168Q152 155Q158 162Q157 172Q152 175Q147 172Z" fill="#a86840" opacity="0.45"/>
+  <!-- Short dark beard — neat but severe -->
+  <path d="M22 128Q20 148Q24 166Q36 184Q62 200Q100 206Q138 200Q164 184Q176 166Q180 148Q178 128Q164 142Q148 150Q126 156Q100 158Q74 156Q52 150Q36 142Q22 128Z" fill="#18100a"/>
+  <!-- Minimal beard texture — orderly unlike Job's -->
+  <path d="M60 142Q58 160Q62 176" stroke="#28180a" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M100 150Q100 168Q100 184" stroke="#28180a" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M140 142Q142 160Q138 176" stroke="#28180a" stroke-width="2" fill="none" stroke-linecap="round"/>
+
+  <!-- Pointing hand visible at bottom edge -->
+  <path d="M148 200Q160 185Q170 192Q168 206Q160 212Z" fill="#a86840" opacity="0.4"/>
 </svg>
