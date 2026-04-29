@@ -93,41 +93,54 @@ exports.handler = async (event) => {
     }));
   }
 
-  // Proxy to Gemini
-  try {
-    const upstream = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${apiKey}`,
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          system_instruction: { parts: [{ text: SYSTEM_PROMPT }] },
-          contents: toGeminiContents(messages),
-          generationConfig: { maxOutputTokens: 1024, temperature: 0.7 }
-        })
+  const requestBody = JSON.stringify({
+    system_instruction: { parts: [{ text: SYSTEM_PROMPT }] },
+    contents: toGeminiContents(messages),
+    generationConfig: { maxOutputTokens: 1024, temperature: 0.7 }
+  });
+
+  // Try models in order — stops at the first one that responds successfully
+  const MODELS = [
+    'gemini-2.0-flash-lite',
+    'gemini-2.0-flash',
+    'gemini-1.5-flash-8b',
+    'gemini-1.5-flash-001',
+    'gemini-pro'
+  ];
+
+  let lastError = 'No available Gemini model found for this API key.';
+
+  for (const model of MODELS) {
+    try {
+      const upstream = await fetch(
+        `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`,
+        { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: requestBody }
+      );
+      const data = await upstream.json();
+
+      // Model not found or not supported — try the next one
+      if (upstream.status === 404 || (upstream.status === 400 && data.error?.message?.includes('not found'))) {
+        lastError = data.error?.message || lastError;
+        continue;
       }
-    );
 
-    const data = await upstream.json();
+      if (!upstream.ok) {
+        return {
+          statusCode: upstream.status,
+          headers: CORS_HEADERS,
+          body: JSON.stringify({ error: data.error?.message || `Gemini API error (${upstream.status})` })
+        };
+      }
 
-    if (!upstream.ok) {
       return {
-        statusCode: upstream.status,
+        statusCode: 200,
         headers: CORS_HEADERS,
-        body: JSON.stringify({ error: data.error?.message || `Gemini API error (${upstream.status})` })
+        body: JSON.stringify({ content: data.candidates?.[0]?.content?.parts?.[0]?.text || '' })
       };
+    } catch (err) {
+      lastError = err.message;
     }
-
-    return {
-      statusCode: 200,
-      headers: CORS_HEADERS,
-      body: JSON.stringify({ content: data.candidates?.[0]?.content?.parts?.[0]?.text || '' })
-    };
-  } catch (err) {
-    return {
-      statusCode: 502,
-      headers: CORS_HEADERS,
-      body: JSON.stringify({ error: 'Could not reach Anthropic: ' + err.message })
-    };
   }
+
+  return { statusCode: 502, headers: CORS_HEADERS, body: JSON.stringify({ error: lastError }) };
 };
