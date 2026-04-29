@@ -76,31 +76,37 @@ exports.handler = async (event) => {
     return { statusCode: 400, headers: CORS_HEADERS, body: JSON.stringify({ error: 'Invalid request body.' }) };
   }
 
-  const apiKey = process.env.ANTHROPIC_API_KEY;
+  const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) {
     return {
       statusCode: 503,
       headers: CORS_HEADERS,
-      body: JSON.stringify({ error: 'Server is missing its API key. Add ANTHROPIC_API_KEY in your Netlify environment variables and redeploy.' })
+      body: JSON.stringify({ error: 'Server is missing its API key. Add GEMINI_API_KEY in your Netlify environment variables and redeploy.' })
     };
   }
 
-  // Proxy to Anthropic
+  // Convert message history to Gemini format (role: 'user' | 'model')
+  function toGeminiContents(msgs) {
+    return msgs.map(m => ({
+      role: m.role === 'assistant' ? 'model' : 'user',
+      parts: [{ text: m.content }]
+    }));
+  }
+
+  // Proxy to Gemini
   try {
-    const upstream = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': apiKey,
-        'anthropic-version': '2023-06-01'
-      },
-      body: JSON.stringify({
-        model: 'claude-haiku-4-5-20251001',
-        max_tokens: 1024,
-        system: SYSTEM_PROMPT,
-        messages
-      })
-    });
+    const upstream = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          system_instruction: { parts: [{ text: SYSTEM_PROMPT }] },
+          contents: toGeminiContents(messages),
+          generationConfig: { maxOutputTokens: 1024, temperature: 0.7 }
+        })
+      }
+    );
 
     const data = await upstream.json();
 
@@ -108,14 +114,14 @@ exports.handler = async (event) => {
       return {
         statusCode: upstream.status,
         headers: CORS_HEADERS,
-        body: JSON.stringify({ error: data.error?.message || `Anthropic API error (${upstream.status})` })
+        body: JSON.stringify({ error: data.error?.message || `Gemini API error (${upstream.status})` })
       };
     }
 
     return {
       statusCode: 200,
       headers: CORS_HEADERS,
-      body: JSON.stringify({ content: data.content?.[0]?.text || '' })
+      body: JSON.stringify({ content: data.candidates?.[0]?.content?.parts?.[0]?.text || '' })
     };
   } catch (err) {
     return {
