@@ -1,5 +1,5 @@
-// Serverless proxy: keeps the Anthropic API key off the client.
-// Deploy to Netlify and add ANTHROPIC_API_KEY as an environment variable.
+// Serverless proxy: keeps the Groq API key off the client.
+// Deploy to Netlify and add GROQ_API_KEY as an environment variable.
 
 const SYSTEM_PROMPT = `You are a thoughtful theological guide helping people — especially teenagers and young adults in Singapore — understand the Book of Job through the lens of Norman Geisler's biblical theology. You are embedded in an interactive website about the Book of Job.
 
@@ -64,7 +64,6 @@ exports.handler = async (event) => {
     return { statusCode: 405, headers: CORS_HEADERS, body: JSON.stringify({ error: 'Method not allowed' }) };
   }
 
-  // Parse and validate the request body
   let messages;
   try {
     ({ messages } = JSON.parse(event.body || '{}'));
@@ -76,71 +75,50 @@ exports.handler = async (event) => {
     return { statusCode: 400, headers: CORS_HEADERS, body: JSON.stringify({ error: 'Invalid request body.' }) };
   }
 
-  const apiKey = process.env.GEMINI_API_KEY;
+  const apiKey = process.env.GROQ_API_KEY;
   if (!apiKey) {
     return {
       statusCode: 503,
       headers: CORS_HEADERS,
-      body: JSON.stringify({ error: 'Server is missing its API key. Add GEMINI_API_KEY in your Netlify environment variables and redeploy.' })
+      body: JSON.stringify({ error: 'Server is missing its API key. Add GROQ_API_KEY in your Netlify environment variables and redeploy.' })
     };
   }
 
-  // Convert message history to Gemini format (role: 'user' | 'model')
-  function toGeminiContents(msgs) {
-    return msgs.map(m => ({
-      role: m.role === 'assistant' ? 'model' : 'user',
-      parts: [{ text: m.content }]
-    }));
-  }
+  try {
+    const upstream = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${apiKey}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        model: 'llama-3.3-70b-versatile',
+        messages: [{ role: 'system', content: SYSTEM_PROMPT }, ...messages],
+        max_tokens: 1024,
+        temperature: 0.7
+      })
+    });
 
-  const requestBody = JSON.stringify({
-    system_instruction: { parts: [{ text: SYSTEM_PROMPT }] },
-    contents: toGeminiContents(messages),
-    generationConfig: { maxOutputTokens: 1024, temperature: 0.7 }
-  });
+    const data = await upstream.json();
 
-  // Try models in order — stops at the first one that responds successfully
-  const MODELS = [
-    'gemini-2.0-flash-lite',
-    'gemini-2.0-flash',
-    'gemini-1.5-flash-8b',
-    'gemini-1.5-flash-001',
-    'gemini-pro'
-  ];
-
-  let lastError = 'No available Gemini model found for this API key.';
-
-  for (const model of MODELS) {
-    try {
-      const upstream = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`,
-        { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: requestBody }
-      );
-      const data = await upstream.json();
-
-      // Model not found or not supported — try the next one
-      if (upstream.status === 404 || (upstream.status === 400 && data.error?.message?.includes('not found'))) {
-        lastError = data.error?.message || lastError;
-        continue;
-      }
-
-      if (!upstream.ok) {
-        return {
-          statusCode: upstream.status,
-          headers: CORS_HEADERS,
-          body: JSON.stringify({ error: data.error?.message || `Gemini API error (${upstream.status})` })
-        };
-      }
-
+    if (!upstream.ok) {
       return {
-        statusCode: 200,
+        statusCode: upstream.status,
         headers: CORS_HEADERS,
-        body: JSON.stringify({ content: data.candidates?.[0]?.content?.parts?.[0]?.text || '' })
+        body: JSON.stringify({ error: data.error?.message || `Groq API error (${upstream.status})` })
       };
-    } catch (err) {
-      lastError = err.message;
     }
-  }
 
-  return { statusCode: 502, headers: CORS_HEADERS, body: JSON.stringify({ error: lastError }) };
+    return {
+      statusCode: 200,
+      headers: CORS_HEADERS,
+      body: JSON.stringify({ content: data.choices?.[0]?.message?.content || '' })
+    };
+  } catch (err) {
+    return {
+      statusCode: 502,
+      headers: CORS_HEADERS,
+      body: JSON.stringify({ error: 'Could not reach Groq: ' + err.message })
+    };
+  }
 };

@@ -473,10 +473,10 @@ function initChat() {
   });
 
   // API key save — only needed in direct (no-backend) mode
-  // Google AI Studio keys start with AIza
+  // Groq keys start with gsk_
   apiSave.addEventListener('click', () => {
     const key = apiInput.value.trim();
-    if (!key.startsWith('AIza')) {
+    if (!key.startsWith('gsk_')) {
       apiInput.classList.add('invalid');
       return;
     }
@@ -662,53 +662,44 @@ async function callClaudeStream(messages, onChunk, onDone, onError) {
     return;
   }
 
-  // ── Mode 2: direct browser → Gemini (local dev, user provides key) ──────
+  // ── Mode 2: direct browser → Groq (local dev, user provides key) ───────
   const key = sessionStorage.getItem('job_chat_key');
-  if (!key) { onError('No API key found. Please enter your Google AI Studio API key below.'); return; }
-
-  function toGeminiContents(msgs) {
-    return msgs.map(m => ({
-      role: m.role === 'assistant' ? 'model' : 'user',
-      parts: [{ text: m.content }]
-    }));
-  }
+  if (!key) { onError('No API key found. Please enter your Groq API key below.'); return; }
 
   let response;
   try {
-    response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:streamGenerateContent?alt=sse&key=${key}`,
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          system_instruction: { parts: [{ text: CHAT_SYSTEM_PROMPT }] },
-          contents: toGeminiContents(messages),
-          generationConfig: { maxOutputTokens: 1024, temperature: 0.7 }
-        })
-      }
-    );
+    response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${key}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        model: 'llama-3.3-70b-versatile',
+        messages: [{ role: 'system', content: CHAT_SYSTEM_PROMPT }, ...messages],
+        max_tokens: 1024,
+        temperature: 0.7,
+        stream: true
+      })
+    });
   } catch {
-    onError(
-      'Could not reach the Gemini API. ' +
-      'If running locally as a file:// URL, serve with a local server instead ' +
-      '(e.g. npx serve . in the project folder).'
-    );
+    onError('Could not reach the Groq API. If running as a file:// URL, serve with a local server (e.g. npx serve . in the project folder).');
     return;
   }
 
   if (!response.ok) {
     const err = await response.json().catch(() => ({}));
-    if (response.status === 400 && err.error?.message?.includes('API key')) {
-      onError('Invalid API key — please clear and re-enter your Google AI Studio key (starts with AIza).');
+    if (response.status === 401) {
+      onError('Invalid API key — please clear and re-enter your Groq key (starts with gsk_).');
     } else if (response.status === 429) {
       onError('Rate limit reached. Please wait a moment and try again.');
     } else {
-      onError(err.error?.message || `Gemini API error (HTTP ${response.status}). Please try again.`);
+      onError(err.error?.message || `Groq API error (HTTP ${response.status}). Please try again.`);
     }
     return;
   }
 
-  // Parse Gemini SSE stream — each event contains a text delta
+  // Parse OpenAI-compatible SSE stream
   try {
     const reader = response.body.getReader();
     const decoder = new TextDecoder();
@@ -723,9 +714,10 @@ async function callClaudeStream(messages, onChunk, onDone, onError) {
       for (const line of lines) {
         if (!line.startsWith('data: ')) continue;
         const data = line.slice(6).trim();
+        if (data === '[DONE]') continue;
         try {
           const ev = JSON.parse(data);
-          const text = ev.candidates?.[0]?.content?.parts?.[0]?.text;
+          const text = ev.choices?.[0]?.delta?.content;
           if (text) onChunk(text);
         } catch (_) {}
       }
