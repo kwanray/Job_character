@@ -418,8 +418,20 @@ TONE AND STYLE:
 
 const chatState = {
   history: [],
-  isTyping: false
+  isTyping: false,
+  backendMode: null  // 'proxy' | 'direct' | null (unknown)
 };
+
+// Lightweight probe: send OPTIONS to /api/chat.
+// The Netlify function returns 200 for OPTIONS; a missing endpoint returns 404.
+async function probeBackend() {
+  try {
+    const r = await fetch('/api/chat', { method: 'OPTIONS' });
+    chatState.backendMode = (r.status === 200) ? 'proxy' : 'direct';
+  } catch {
+    chatState.backendMode = 'direct';
+  }
+}
 
 function initChat() {
   const toggle    = document.getElementById('chatToggle');
@@ -436,11 +448,20 @@ function initChat() {
 
   if (!toggle) return;
 
-  // Restore key from sessionStorage
-  if (sessionStorage.getItem('job_chat_key')) {
-    setup.style.display = 'none';
-    inputArea.classList.add('active');
-  }
+  // Probe for backend proxy, then configure UI accordingly
+  probeBackend().then(() => {
+    if (chatState.backendMode === 'proxy') {
+      // Backend handles the key — no input needed
+      setup.style.display = 'none';
+      inputArea.classList.add('active');
+    } else {
+      // Direct mode: show key input unless a key is already stored
+      if (sessionStorage.getItem('job_chat_key')) {
+        setup.style.display = 'none';
+        inputArea.classList.add('active');
+      }
+    }
+  });
 
   toggle.addEventListener('click', () => {
     sidebar.classList.contains('open') ? closeChatSidebar() : openChatSidebar();
@@ -451,7 +472,7 @@ function initChat() {
     if (e.key === 'Escape' && sidebar.classList.contains('open')) closeChatSidebar();
   });
 
-  // API key save — accept any sk- prefix (Anthropic format)
+  // API key save — only needed in direct (no-backend) mode
   apiSave.addEventListener('click', () => {
     const key = apiInput.value.trim();
     if (!key.startsWith('sk-')) {
@@ -474,11 +495,11 @@ function initChat() {
       if (!pill) return;
       const q = pill.dataset.q;
       suggsWrap.remove();
-      if (sessionStorage.getItem('job_chat_key')) {
+      const ready = chatState.backendMode === 'proxy' || sessionStorage.getItem('job_chat_key');
+      if (ready) {
         textarea.value = q;
         submitChatMessage();
       } else {
-        // No key yet — put the question text into the API key input area note, and pre-fill textarea for later
         textarea.value = q;
         apiInput.focus();
       }
@@ -611,7 +632,36 @@ async function submitChatMessage() {
   );
 }
 
+// Word-by-word reveal of a full string, simulating a streaming effect
+async function simulateStream(text, onChunk, onDone) {
+  const words = text.split(' ');
+  for (let i = 0; i < words.length; i++) {
+    onChunk((i > 0 ? ' ' : '') + words[i]);
+    // Small pause every 5 words so it feels natural
+    if (i % 5 === 4) await new Promise(r => setTimeout(r, 18));
+  }
+  onDone();
+}
+
 async function callClaudeStream(messages, onChunk, onDone, onError) {
+  // ── Mode 1: backend proxy (Netlify function, key stays server-side) ──────
+  if (chatState.backendMode === 'proxy') {
+    try {
+      const resp = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages })
+      });
+      const data = await resp.json();
+      if (!resp.ok) { onError(data.error || `Server error (${resp.status})`); return; }
+      await simulateStream(data.content || '', onChunk, onDone);
+    } catch {
+      onError('Could not reach the chat server. Please try again.');
+    }
+    return;
+  }
+
+  // ── Mode 2: direct browser → Anthropic (local dev, user provides key) ───
   const key = sessionStorage.getItem('job_chat_key');
   if (!key) { onError('No API key found. Please enter your Anthropic API key below.'); return; }
 
