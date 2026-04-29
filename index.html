@@ -476,5 +476,63 @@
   </footer>
 
   <script src="app.js"></script>
+
+  <!-- Chat Assistant -->
+  <button id="chatToggle" class="chat-toggle" aria-label="Open Job theology assistant" aria-expanded="false">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+    </svg>
+    <span class="chat-toggle-label">Ask</span>
+  </button>
+
+  <aside id="chatSidebar" class="chat-sidebar" role="complementary" aria-label="Job theology assistant">
+    <div class="chat-head">
+      <div class="chat-head-info">
+        <span class="chat-head-icon" aria-hidden="true">✦</span>
+        <div>
+          <div class="chat-title">Ask About Job</div>
+          <div class="chat-subtitle">Geisler's Theology · Claude AI</div>
+        </div>
+      </div>
+      <button id="chatClose" class="chat-close-btn" aria-label="Close chat">&#x2715;</button>
+    </div>
+
+    <div id="chatMessages" class="chat-messages" role="log" aria-live="polite" aria-label="Chat conversation">
+      <div class="chat-msg assistant">
+        <div class="chat-bubble">
+          <p>Hi! I'm here to help you explore the Book of Job through Norman Geisler's theology.</p>
+          <p>Ask me about the characters, the problem of evil, or what this ancient story means for your life today.</p>
+        </div>
+      </div>
+      <div class="chat-suggestions" id="chatSuggestions">
+        <button class="chat-sugg" data-q="Why did God allow Job to suffer if he was blameless?">Why did God allow Job to suffer?</button>
+        <button class="chat-sugg" data-q="What did Job's three friends get theologically wrong?">What did Job's friends get wrong?</button>
+        <button class="chat-sugg" data-q="How does Job apply to exam stress and academic pressure in Singapore?">Job and exam pressure</button>
+        <button class="chat-sugg" data-q="What is Geisler's answer to the problem of evil compared to other worldviews?">Geisler on the problem of evil</button>
+      </div>
+    </div>
+
+    <div id="chatSetup" class="chat-setup">
+      <label class="chat-setup-label" for="chatApiKey">Enter your Anthropic API key to begin:</label>
+      <div class="chat-setup-row">
+        <input type="password" id="chatApiKey" class="chat-api-input" placeholder="sk-ant-api…" autocomplete="off" spellcheck="false">
+        <button id="chatApiSave" class="chat-api-btn">Start</button>
+      </div>
+      <p class="chat-setup-note">Stored for this session only · sent directly to Anthropic</p>
+    </div>
+
+    <div id="chatInputArea" class="chat-input-area">
+      <textarea id="chatInput" class="chat-textarea" placeholder="Ask about Job, suffering, or Geisler's theology…" rows="1" aria-label="Type your question"></textarea>
+      <button id="chatSend" class="chat-send-btn" aria-label="Send">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="22" y1="2" x2="11" y2="13"/>
+          <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+        </svg>
+      </button>
+    </div>
+  </aside>
+
+  <div id="chatBackdrop" class="chat-backdrop"></div>
+
 </body>
 </html>

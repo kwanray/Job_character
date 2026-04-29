@@ -362,4 +362,309 @@ document.addEventListener('DOMContentLoaded', () => {
   initAccordion();
   initTabs();
   initNav();
+  initChat();
 });
+
+// ============================================================
+// CHAT ASSISTANT
+// ============================================================
+
+const CHAT_SYSTEM_PROMPT = `You are a thoughtful theological guide helping people — especially teenagers and young adults in Singapore — understand the Book of Job through the lens of Norman Geisler's biblical theology. You are embedded in an interactive website about the Book of Job.
+
+GEISLER'S THEODICY FRAMEWORK (from "The Roots of Evil" and "If God, Why Evil?"):
+1. God is not the author of evil — he permits it but never causes it
+2. Free Will Defense: moral evil arises from genuine creaturely freedom; real love requires real choice
+3. Greater Good Defense: God can allow genuine evil for higher redemptive purposes that couldn't be achieved otherwise
+4. Soul-Making: suffering is the context for forming virtues (courage, compassion, patience) that can't develop in a pain-free world
+5. Eschatological Resolution: ultimate justice awaits eternity; the final account is not closed in this life
+
+WORLDVIEW COMPARISON (Geisler's analysis):
+- Atheism: cannot define evil as truly evil without a transcendent moral standard it cannot justify; "no one to answer"
+- New Age / Pantheism: denies evil as illusion (maya) — this is not a solution but a denial of the problem; an impersonal force cannot care or enter suffering
+- Buddhism: acknowledges suffering (dukkha), explains it via karma and past lives, but has no personal God to address it, no atonement, no resurrection — only escape from self
+- Christianity alone: affirms a real personal God who faces real evil and provides a real redemptive solution — through incarnation (God enters suffering), crucifixion (God bears evil's weight), resurrection (evil defeated), new creation (evil ended)
+
+THE SEVEN CHARACTERS:
+- Job: Righteous sufferer. Believes in his innocence. Laments honestly and angrily. Refuses friends' retributive framework. Occasionally tips into self-righteousness (chs 29-31) but core position is valid. Vindicated by God in Job 42:7.
+- Eliphaz: Experiential retributionist. Oldest and most sophisticated friend. Appeals to mystical vision and personal observation. "No innocent person truly perishes." Gentle at first, fabricates sins by ch. 22. Right principle, catastrophically wrong application. Rebuked by God.
+- Bildad: Traditionalist retributionist. Appeals to ancestral wisdom. Speeches get shorter across the three rounds (suggesting even he runs out of arguments). Rebuked by God.
+- Zophar: Dogmatic retributionist. Harshest — no pastoral nuance, leads with condemnation, disappears from the third cycle entirely. Rebuked. Uses correct categories (God's omniscience, human sinfulness) as weapons.
+- Elihu: Young mediator. Waited out of respect. Rebukes both friends (for condemning Job wrongly) and Job (for implying God was unjust). Key advance: suffering is instructive, not only punitive — God uses it to warn and redirect. Uses word "ransom" (Job 33:24). Prepares for divine speeches. NOT rebuked in ch. 42 — directionally correct.
+- God (Yahweh): Speaks from the whirlwind with 77+ rhetorical questions (chs 38-41). Does not explain the wager. Expands Job's frame of reference. Answer is encounter, not explanation. Vindicates Job, rebukes friends, accepts Job's intercession for them. Restores Job doubly.
+- Satan (ha-satan): The Accuser in the heavenly court (prosecutorial function, not the fully developed NT devil). Challenge: "Does Job fear God for nothing?" — all religious faith is ultimately self-interested. Decisively refuted by Job's endurance under total loss.
+
+GEISLER'S KEY INTERPRETIVE CLAIMS:
+- The friends' retribution theology is the book's central theological error — right principle, wrong application
+- Job 42:7: God says "You have not spoken of me what is right, as my servant Job has" — honest wrestling > polished orthodoxy
+- God's whirlwind speech is intentionally non-propositional: the real problem was Job's limited vision of God, not lack of information
+- Elihu is transitional — not rebuked, points toward the divine speeches
+- Resolution is relational encounter (Job 42:5: "now my eyes have seen you"), not intellectual explanation
+
+PRACTICAL APPLICATIONS FOR SINGAPORE TEENS:
+- Academic pressure (PSLE/O/A-Levels): bad results ≠ divine punishment — contra the friends' logic
+- Honest lament: Job's angry prayers are in Scripture; God did not rebuke Job for them
+- Prosperity gospel warning: "be faithful and God blesses materially" is exactly the friends' error
+- God sees a bigger picture: the whirlwind speech principle
+- Identity ≠ performance: Job was righteous before and after his losses; worth doesn't depend on achievement
+- Discernment about advice: well-meaning people can give Eliphaz-quality counsel
+
+TONE AND STYLE:
+- Warm, clear, accessible — speak to young people without being condescending
+- Ground answers in specific passages from Job (ESV)
+- Keep responses focused — 2 to 4 short paragraphs maximum
+- Be honest about what remains mysterious while affirming God's goodness and sovereignty
+- When someone seems distressed or struggling, lead with compassion before theology
+- Do not speculate beyond the text or Geisler's framework`;
+
+const chatState = {
+  history: [],
+  isTyping: false
+};
+
+function initChat() {
+  const toggle    = document.getElementById('chatToggle');
+  const sidebar   = document.getElementById('chatSidebar');
+  const closeBtn  = document.getElementById('chatClose');
+  const backdrop  = document.getElementById('chatBackdrop');
+  const apiSave   = document.getElementById('chatApiSave');
+  const apiInput  = document.getElementById('chatApiKey');
+  const sendBtn   = document.getElementById('chatSend');
+  const textarea  = document.getElementById('chatInput');
+  const setup     = document.getElementById('chatSetup');
+  const inputArea = document.getElementById('chatInputArea');
+  const suggsWrap = document.getElementById('chatSuggestions');
+
+  if (!toggle) return;
+
+  // Restore key from sessionStorage
+  if (sessionStorage.getItem('job_chat_key')) {
+    setup.style.display = 'none';
+    inputArea.classList.add('active');
+  }
+
+  toggle.addEventListener('click', () => {
+    sidebar.classList.contains('open') ? closeChatSidebar() : openChatSidebar();
+  });
+  closeBtn.addEventListener('click', closeChatSidebar);
+  backdrop.addEventListener('click', closeChatSidebar);
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && sidebar.classList.contains('open')) closeChatSidebar();
+  });
+
+  // API key save
+  apiSave.addEventListener('click', () => {
+    const key = apiInput.value.trim();
+    if (!key.startsWith('sk-ant-')) {
+      apiInput.classList.add('invalid');
+      return;
+    }
+    apiInput.classList.remove('invalid');
+    sessionStorage.setItem('job_chat_key', key);
+    setup.style.display = 'none';
+    inputArea.classList.add('active');
+    textarea.focus();
+  });
+  apiInput.addEventListener('keydown', e => { if (e.key === 'Enter') apiSave.click(); });
+  apiInput.addEventListener('input', () => apiInput.classList.remove('invalid'));
+
+  // Suggestion pills
+  if (suggsWrap) {
+    suggsWrap.addEventListener('click', e => {
+      const pill = e.target.closest('.chat-sugg');
+      if (!pill) return;
+      const q = pill.dataset.q;
+      suggsWrap.remove();
+      if (sessionStorage.getItem('job_chat_key')) {
+        textarea.value = q;
+        submitChatMessage();
+      } else {
+        // No key yet — put the question text into the API key input area note, and pre-fill textarea for later
+        textarea.value = q;
+        apiInput.focus();
+      }
+    });
+  }
+
+  // Send
+  sendBtn.addEventListener('click', submitChatMessage);
+  textarea.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); submitChatMessage(); }
+  });
+  textarea.addEventListener('input', () => {
+    textarea.style.height = 'auto';
+    textarea.style.height = Math.min(textarea.scrollHeight, 120) + 'px';
+  });
+}
+
+function openChatSidebar() {
+  const sidebar  = document.getElementById('chatSidebar');
+  const backdrop = document.getElementById('chatBackdrop');
+  const toggle   = document.getElementById('chatToggle');
+  sidebar.classList.add('open');
+  backdrop.classList.add('open');
+  toggle.setAttribute('aria-expanded', 'true');
+}
+
+function closeChatSidebar() {
+  const sidebar  = document.getElementById('chatSidebar');
+  const backdrop = document.getElementById('chatBackdrop');
+  const toggle   = document.getElementById('chatToggle');
+  sidebar.classList.remove('open');
+  backdrop.classList.remove('open');
+  toggle.setAttribute('aria-expanded', 'false');
+}
+
+function chatEscape(str) {
+  return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+function formatChatMarkdown(text) {
+  const paragraphs = text.split(/\n\n+/);
+  return paragraphs
+    .filter(p => p.trim())
+    .map(p => {
+      const html = p
+        .replace(/\n/g, '<br>')
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\*(.*?)\*/g, '<em>$1</em>');
+      return `<p>${html}</p>`;
+    })
+    .join('');
+}
+
+function addTypingIndicator() {
+  const msgs = document.getElementById('chatMessages');
+  const div = document.createElement('div');
+  div.className = 'chat-msg assistant';
+  div.id = 'chatTyping';
+  div.innerHTML = '<div class="chat-bubble"><div class="typing-dots"><span class="typing-dot"></span><span class="typing-dot"></span><span class="typing-dot"></span></div></div>';
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function removeTypingIndicator() {
+  document.getElementById('chatTyping')?.remove();
+}
+
+async function submitChatMessage() {
+  if (chatState.isTyping) return;
+
+  const textarea  = document.getElementById('chatInput');
+  const sendBtn   = document.getElementById('chatSend');
+  const msgs      = document.getElementById('chatMessages');
+  const text      = textarea.value.trim();
+  if (!text) return;
+
+  textarea.value = '';
+  textarea.style.height = 'auto';
+
+  // User bubble
+  const userDiv = document.createElement('div');
+  userDiv.className = 'chat-msg user';
+  userDiv.innerHTML = `<div class="chat-bubble"><p>${chatEscape(text)}</p></div>`;
+  msgs.appendChild(userDiv);
+  msgs.scrollTop = msgs.scrollHeight;
+
+  chatState.history.push({ role: 'user', content: text });
+  chatState.isTyping = true;
+  sendBtn.disabled = true;
+  addTypingIndicator();
+
+  let assistantBubble = null;
+  let fullText = '';
+
+  await callClaudeStream(
+    chatState.history,
+    chunk => {
+      fullText += chunk;
+      if (!assistantBubble) {
+        removeTypingIndicator();
+        const wrap = document.createElement('div');
+        wrap.className = 'chat-msg assistant';
+        const bubble = document.createElement('div');
+        bubble.className = 'chat-bubble';
+        wrap.appendChild(bubble);
+        msgs.appendChild(wrap);
+        assistantBubble = bubble;
+      }
+      assistantBubble.innerHTML = formatChatMarkdown(fullText);
+      msgs.scrollTop = msgs.scrollHeight;
+    },
+    () => {
+      removeTypingIndicator();
+      chatState.history.push({ role: 'assistant', content: fullText });
+      chatState.isTyping = false;
+      sendBtn.disabled = false;
+      textarea.focus();
+    },
+    errMsg => {
+      removeTypingIndicator();
+      const errDiv = document.createElement('div');
+      errDiv.className = 'chat-msg error';
+      errDiv.innerHTML = `<div class="chat-bubble"><p>${chatEscape(errMsg)}</p></div>`;
+      msgs.appendChild(errDiv);
+      msgs.scrollTop = msgs.scrollHeight;
+      chatState.history.pop();
+      chatState.isTyping = false;
+      sendBtn.disabled = false;
+    }
+  );
+}
+
+async function callClaudeStream(messages, onChunk, onDone, onError) {
+  const key = sessionStorage.getItem('job_chat_key');
+  if (!key) { onError('No API key found. Please enter your Anthropic API key below.'); return; }
+
+  try {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': key,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-allow-browser': 'true'
+      },
+      body: JSON.stringify({
+        model: 'claude-haiku-4-5-20251001',
+        max_tokens: 1024,
+        system: CHAT_SYSTEM_PROMPT,
+        messages: messages,
+        stream: true
+      })
+    });
+
+    if (!response.ok) {
+      const err = await response.json().catch(() => ({}));
+      const msg = err.error?.message || `API error (${response.status})`;
+      if (response.status === 401) throw new Error('Invalid API key. Please check and re-enter it.');
+      if (response.status === 429) throw new Error('Rate limit reached. Please wait a moment and try again.');
+      throw new Error(msg);
+    }
+
+    const reader = response.body.getReader();
+    const decoder = new TextDecoder();
+    let buffer = '';
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      buffer += decoder.decode(value, { stream: true });
+      const lines = buffer.split('\n');
+      buffer = lines.pop() || '';
+      for (const line of lines) {
+        if (!line.startsWith('data: ')) continue;
+        const data = line.slice(6).trim();
+        if (data === '[DONE]') continue;
+        try {
+          const ev = JSON.parse(data);
+          if (ev.type === 'content_block_delta' && ev.delta?.type === 'text_delta') {
+            onChunk(ev.delta.text);
+          }
+        } catch (_) {}
+      }
+    }
+    onDone();
+  } catch (err) {
+    onError(err.message || 'Network error. Please check your connection and try again.');
+  }
+}
