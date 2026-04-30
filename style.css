@@ -1622,3 +1622,240 @@ section {
     right: 1.25rem;
   }
 }
+
+/* ============================================================
+   AUTH — NAVBAR
+   ============================================================ */
+
+.nav-auth {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-left: 1.5rem;
+  flex-shrink: 0;
+}
+
+.btn-google-signin {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--surface-2);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  padding: 0.45rem 1rem;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background var(--transition), border-color var(--transition), transform var(--transition);
+  white-space: nowrap;
+}
+
+.btn-google-signin:hover {
+  background: var(--surface-3);
+  border-color: rgba(240, 165, 0, 0.3);
+  transform: translateY(-1px);
+}
+
+.btn-google-signin:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+.nav-user {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.nav-user-photo {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border);
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.nav-user-name {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text);
+  max-width: 90px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.btn-sign-out {
+  background: none;
+  border: 1px solid var(--border-subtle);
+  border-radius: 100px;
+  color: var(--text-muted);
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.3rem 0.7rem;
+  cursor: pointer;
+  transition: border-color var(--transition), color var(--transition), background var(--transition);
+  white-space: nowrap;
+}
+
+.btn-sign-out:hover {
+  border-color: var(--border);
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+/* ============================================================
+   JOURNAL — TEEN CARDS
+   ============================================================ */
+
+.journal-area {
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 1rem;
+  margin-top: 0.5rem;
+}
+
+.journal-signin-prompt {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  padding: 0.6rem 0.75rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px dashed rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius);
+}
+
+.journal-lock-icon {
+  font-size: 0.9rem;
+  flex-shrink: 0;
+  opacity: 0.6;
+}
+
+.journal-signin-text {
+  line-height: 1.4;
+}
+
+.journal-signin-link {
+  color: var(--gold);
+  text-decoration: underline;
+  text-decoration-color: rgba(240, 165, 0, 0.4);
+  font-weight: 500;
+  transition: color var(--transition);
+}
+
+.journal-signin-link:hover {
+  color: var(--gold-light);
+  text-decoration-color: var(--gold-light);
+}
+
+.journal-label {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.5rem;
+}
+
+.journal-textarea {
+  width: 100%;
+  box-sizing: border-box;
+  background: var(--bg);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  line-height: 1.6;
+  padding: 0.65rem 0.85rem;
+  resize: vertical;
+  min-height: 72px;
+  max-height: 200px;
+  outline: none;
+  transition: border-color var(--transition);
+}
+
+.journal-textarea:focus {
+  border-color: rgba(240, 165, 0, 0.4);
+}
+
+.journal-textarea::placeholder {
+  color: var(--text-dim);
+}
+
+.journal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+  min-height: 28px;
+}
+
+.journal-status {
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  font-style: italic;
+  transition: color var(--transition);
+}
+
+.journal-status.saved  { color: #4cc96e; }
+.journal-status.error  { color: #e66; }
+.journal-status.saving { color: var(--gold-dim); }
+
+.journal-save-btn {
+  background: var(--gold);
+  color: var(--bg-dark);
+  border: none;
+  border-radius: 100px;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.35rem 0.9rem;
+  cursor: pointer;
+  transition: background var(--transition), transform var(--transition);
+  flex-shrink: 0;
+}
+
+.journal-save-btn:hover {
+  background: var(--gold-light);
+  transform: translateY(-1px);
+}
+
+.journal-save-btn:disabled {
+  background: var(--surface-3);
+  color: var(--text-dim);
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ============================================================
+   AUTH — MOBILE RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 768px) {
+  .nav-auth {
+    margin-left: 0;
+    margin-right: 0.5rem;
+    order: 2;
+  }
+
+  .nav-user-name {
+    display: none;
+  }
+
+  .btn-sign-out {
+    font-size: 0.7rem;
+    padding: 0.25rem 0.6rem;
+  }
+
+  .btn-google-signin {
+    font-size: 0.78rem;
+    padding: 0.4rem 0.75rem;
+  }
+}

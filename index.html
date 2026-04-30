@@ -25,6 +25,22 @@
         <li><a href="#exposition" class="nav-link">Geisler's Exposition</a></li>
         <li><a href="#for-teens" class="nav-link">For Teens</a></li>
       </ul>
+      <div class="nav-auth" id="navAuth">
+        <button class="btn-google-signin" id="googleSignIn" aria-label="Sign in with Google">
+          <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
+            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+          </svg>
+          Sign In
+        </button>
+        <div class="nav-user" id="navUser" hidden>
+          <img class="nav-user-photo" id="navUserPhoto" src="" alt="Profile photo" width="28" height="28">
+          <span class="nav-user-name" id="navUserName"></span>
+          <button class="btn-sign-out" id="signOut">Sign Out</button>
+        </div>
+      </div>
     </div>
   </nav>
 
@@ -366,7 +382,7 @@
 
       <div class="teen-grid">
 
-        <div class="teen-card">
+        <div class="teen-card" data-card-id="academic-pressure">
           <div class="teen-icon">📚</div>
           <h3>Academic Pressure</h3>
           <p class="teen-context">PSLE. O-Levels. A-Levels. The weight of an education system built on performance — and the nagging fear that a bad result means God is displeased with you.</p>
@@ -376,9 +392,23 @@
           </div>
           <p class="teen-application">Not all suffering is punishment. Lament is allowed. Bring your anxiety to God honestly — that is exactly what Job did, and God called it more righteous than polished, performed faith.</p>
           <div class="teen-verse">"Do not be anxious about anything, but in everything by prayer... present your requests to God." — Philippians 4:6</div>
+          <div class="journal-area" data-card-id="academic-pressure">
+            <div class="journal-signin-prompt" id="journal-prompt-academic-pressure">
+              <span class="journal-lock-icon" aria-hidden="true">🔒</span>
+              <span class="journal-signin-text"><a href="#" class="journal-signin-link" data-trigger-signin>Sign in</a> to save your reflection</span>
+            </div>
+            <div class="journal-editor" id="journal-editor-academic-pressure" hidden>
+              <label class="journal-label" for="journal-textarea-academic-pressure">Your reflection</label>
+              <textarea class="journal-textarea" id="journal-textarea-academic-pressure" placeholder="What does this mean for your life? Write freely..." rows="3" aria-label="Personal reflection for Academic Pressure"></textarea>
+              <div class="journal-footer">
+                <span class="journal-status" id="journal-status-academic-pressure" aria-live="polite"></span>
+                <button class="journal-save-btn" id="journal-save-academic-pressure" data-card-id="academic-pressure">Save</button>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div class="teen-card">
+        <div class="teen-card" data-card-id="family-expectations">
           <div class="teen-icon">👨‍👩‍👦</div>
           <h3>Family Expectations</h3>
           <p class="teen-context">In Singapore's family culture, the weight of parental sacrifice is real. Disappointing your parents can feel like a moral failure — even a spiritual one.</p>
@@ -388,9 +418,23 @@
           </div>
           <p class="teen-application">Your identity before God is not defined by your family's honour or your performance. Geisler's soul-making principle: pressure is the context in which real character is formed — not destroyed.</p>
           <div class="teen-verse">"Am I now trying to win the approval of human beings, or of God?" — Galatians 1:10</div>
+          <div class="journal-area" data-card-id="family-expectations">
+            <div class="journal-signin-prompt" id="journal-prompt-family-expectations">
+              <span class="journal-lock-icon" aria-hidden="true">🔒</span>
+              <span class="journal-signin-text"><a href="#" class="journal-signin-link" data-trigger-signin>Sign in</a> to save your reflection</span>
+            </div>
+            <div class="journal-editor" id="journal-editor-family-expectations" hidden>
+              <label class="journal-label" for="journal-textarea-family-expectations">Your reflection</label>
+              <textarea class="journal-textarea" id="journal-textarea-family-expectations" placeholder="What does this mean for your life? Write freely..." rows="3" aria-label="Personal reflection for Family Expectations"></textarea>
+              <div class="journal-footer">
+                <span class="journal-status" id="journal-status-family-expectations" aria-live="polite"></span>
+                <button class="journal-save-btn" id="journal-save-family-expectations" data-card-id="family-expectations">Save</button>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div class="teen-card">
+        <div class="teen-card" data-card-id="faith-questions">
           <div class="teen-icon">🤔</div>
           <h3>Faith Questions &amp; Doubt</h3>
           <p class="teen-context">University, secular peers, social media. Questions about science, suffering, and whether Christianity holds up. The pressure to perform certainty you don't actually feel.</p>
@@ -400,9 +444,23 @@
           </div>
           <p class="teen-application">Your questions are not disqualifying. Doubt taken honestly to God is itself an act of faith. Geisler: the encounter with God — not the resolution of every question — is what transforms us.</p>
           <div class="teen-verse">"Though he slay me, I will hope in him; yet I will argue my ways to his face." — Job 13:15</div>
+          <div class="journal-area" data-card-id="faith-questions">
+            <div class="journal-signin-prompt" id="journal-prompt-faith-questions">
+              <span class="journal-lock-icon" aria-hidden="true">🔒</span>
+              <span class="journal-signin-text"><a href="#" class="journal-signin-link" data-trigger-signin>Sign in</a> to save your reflection</span>
+            </div>
+            <div class="journal-editor" id="journal-editor-faith-questions" hidden>
+              <label class="journal-label" for="journal-textarea-faith-questions">Your reflection</label>
+              <textarea class="journal-textarea" id="journal-textarea-faith-questions" placeholder="What does this mean for your life? Write freely..." rows="3" aria-label="Personal reflection for Faith Questions and Doubt"></textarea>
+              <div class="journal-footer">
+                <span class="journal-status" id="journal-status-faith-questions" aria-live="polite"></span>
+                <button class="journal-save-btn" id="journal-save-faith-questions" data-card-id="faith-questions">Save</button>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div class="teen-card">
+        <div class="teen-card" data-card-id="suffering-without-answers">
           <div class="teen-icon">🌑</div>
           <h3>Suffering Without Answers</h3>
           <p class="teen-context">Mental health struggles, broken families, loss, grief. Pain that doesn't make sense — and a church culture that sometimes demands you explain it or smile through it.</p>
@@ -412,9 +470,23 @@
           </div>
           <p class="teen-application">You don't need to resolve your suffering intellectually before God can meet you in it. The God who governs Leviathan governs your pain too. Geisler: the final resolution may lie beyond what we can see now — but it is real.</p>
           <div class="teen-verse">"Our present sufferings are not worth comparing with the glory that will be revealed." — Romans 8:18</div>
+          <div class="journal-area" data-card-id="suffering-without-answers">
+            <div class="journal-signin-prompt" id="journal-prompt-suffering-without-answers">
+              <span class="journal-lock-icon" aria-hidden="true">🔒</span>
+              <span class="journal-signin-text"><a href="#" class="journal-signin-link" data-trigger-signin>Sign in</a> to save your reflection</span>
+            </div>
+            <div class="journal-editor" id="journal-editor-suffering-without-answers" hidden>
+              <label class="journal-label" for="journal-textarea-suffering-without-answers">Your reflection</label>
+              <textarea class="journal-textarea" id="journal-textarea-suffering-without-answers" placeholder="What does this mean for your life? Write freely..." rows="3" aria-label="Personal reflection for Suffering Without Answers"></textarea>
+              <div class="journal-footer">
+                <span class="journal-status" id="journal-status-suffering-without-answers" aria-live="polite"></span>
+                <button class="journal-save-btn" id="journal-save-suffering-without-answers" data-card-id="suffering-without-answers">Save</button>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div class="teen-card">
+        <div class="teen-card" data-card-id="watch-who-you-listen-to">
           <div class="teen-icon">📱</div>
           <h3>Watch Who You Listen To</h3>
           <p class="teen-context">Prosperity gospel preachers, influencers with spiritual frameworks for every problem, and well-meaning friends who have confident answers to why you're struggling.</p>
@@ -424,9 +496,23 @@
           </div>
           <p class="teen-application">The prosperity gospel — "be faithful and God will bless you materially" — is exactly the friends' error. Test what you hear. God vindicated Job's honest struggle over the friends' tidy orthodoxy.</p>
           <div class="teen-verse">"You have not spoken of me what is right, as my servant Job has." — Job 42:7</div>
+          <div class="journal-area" data-card-id="watch-who-you-listen-to">
+            <div class="journal-signin-prompt" id="journal-prompt-watch-who-you-listen-to">
+              <span class="journal-lock-icon" aria-hidden="true">🔒</span>
+              <span class="journal-signin-text"><a href="#" class="journal-signin-link" data-trigger-signin>Sign in</a> to save your reflection</span>
+            </div>
+            <div class="journal-editor" id="journal-editor-watch-who-you-listen-to" hidden>
+              <label class="journal-label" for="journal-textarea-watch-who-you-listen-to">Your reflection</label>
+              <textarea class="journal-textarea" id="journal-textarea-watch-who-you-listen-to" placeholder="What does this mean for your life? Write freely..." rows="3" aria-label="Personal reflection for Watch Who You Listen To"></textarea>
+              <div class="journal-footer">
+                <span class="journal-status" id="journal-status-watch-who-you-listen-to" aria-live="polite"></span>
+                <button class="journal-save-btn" id="journal-save-watch-who-you-listen-to" data-card-id="watch-who-you-listen-to">Save</button>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div class="teen-card">
+        <div class="teen-card" data-card-id="identity-resilience">
           <div class="teen-icon">✊</div>
           <h3>Identity &amp; Resilience</h3>
           <p class="teen-context">When everything is stripped away — results, reputation, approval — who are you? What remains when the externals are gone?</p>
@@ -436,6 +522,20 @@
           </div>
           <p class="teen-application">You are not your grades, your CCA record, your social standing, or your family's expectations. Geisler: disinterested faith — loving God for who he is, not what he gives — is the deepest resilience there is. Job proved it exists.</p>
           <div class="teen-verse">"Does Job fear God for nothing?" — Job 1:9 <em>(The accuser asked. The answer was yes.)</em></div>
+          <div class="journal-area" data-card-id="identity-resilience">
+            <div class="journal-signin-prompt" id="journal-prompt-identity-resilience">
+              <span class="journal-lock-icon" aria-hidden="true">🔒</span>
+              <span class="journal-signin-text"><a href="#" class="journal-signin-link" data-trigger-signin>Sign in</a> to save your reflection</span>
+            </div>
+            <div class="journal-editor" id="journal-editor-identity-resilience" hidden>
+              <label class="journal-label" for="journal-textarea-identity-resilience">Your reflection</label>
+              <textarea class="journal-textarea" id="journal-textarea-identity-resilience" placeholder="What does this mean for your life? Write freely..." rows="3" aria-label="Personal reflection for Identity and Resilience"></textarea>
+              <div class="journal-footer">
+                <span class="journal-status" id="journal-status-identity-resilience" aria-live="polite"></span>
+                <button class="journal-save-btn" id="journal-save-identity-resilience" data-card-id="identity-resilience">Save</button>
+              </div>
+            </div>
+          </div>
         </div>
 
       </div>
@@ -475,6 +575,10 @@
     </div>
   </footer>
 
+  <!-- Firebase v9 Compat SDK — must load before app.js -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
   <script src="app.js"></script>
 
   <!-- Chat Assistant -->

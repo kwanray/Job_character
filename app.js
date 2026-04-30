@@ -354,6 +354,179 @@ function initNav() {
 }
 
 // ============================================================
+// FIREBASE CONFIGURATION
+// Replace these placeholder values with your actual Firebase
+// project config from: Firebase Console → Project Settings → Your apps
+// These values are safe to commit — Security Rules control access.
+// ============================================================
+
+const FIREBASE_CONFIG = {
+  apiKey:            'REPLACE_WITH_YOUR_API_KEY',
+  authDomain:        'REPLACE_WITH_YOUR_AUTH_DOMAIN',
+  projectId:         'REPLACE_WITH_YOUR_PROJECT_ID',
+  storageBucket:     'REPLACE_WITH_YOUR_STORAGE_BUCKET',
+  messagingSenderId: 'REPLACE_WITH_YOUR_MESSAGING_SENDER_ID',
+  appId:             'REPLACE_WITH_YOUR_APP_ID'
+};
+
+firebase.initializeApp(FIREBASE_CONFIG);
+const db   = firebase.firestore();
+const auth = firebase.auth();
+let currentUser = null;
+
+// ============================================================
+// GOOGLE AUTH
+// ============================================================
+
+function initAuth() {
+  const signInBtn  = document.getElementById('googleSignIn');
+  const signOutBtn = document.getElementById('signOut');
+
+  if (signInBtn) signInBtn.addEventListener('click', handleGoogleSignIn);
+  if (signOutBtn) signOutBtn.addEventListener('click', handleSignOut);
+
+  // Delegate sign-in link clicks from all 6 journal prompts
+  const teenGrid = document.querySelector('.teen-grid');
+  if (teenGrid) {
+    teenGrid.addEventListener('click', e => {
+      if (e.target.closest('[data-trigger-signin]')) {
+        e.preventDefault();
+        handleGoogleSignIn();
+      }
+    });
+  }
+
+  auth.onAuthStateChanged(user => {
+    currentUser = user;
+    updateNavAuthUI(user);
+    updateAllJournalAreas(user);
+    if (user) loadAllReflections(user.uid);
+  });
+}
+
+function handleGoogleSignIn() {
+  const provider = new firebase.auth.GoogleAuthProvider();
+  auth.signInWithPopup(provider).catch(err => {
+    if (err.code !== 'auth/popup-closed-by-user' &&
+        err.code !== 'auth/cancelled-popup-request') {
+      console.warn('Sign-in error:', err.message);
+    }
+  });
+}
+
+function handleSignOut() {
+  auth.signOut().catch(err => console.warn('Sign-out error:', err.message));
+}
+
+function updateNavAuthUI(user) {
+  const signInBtn    = document.getElementById('googleSignIn');
+  const navUser      = document.getElementById('navUser');
+  const navUserPhoto = document.getElementById('navUserPhoto');
+  const navUserName  = document.getElementById('navUserName');
+
+  if (!signInBtn || !navUser) return;
+
+  if (user) {
+    signInBtn.hidden = true;
+    navUser.hidden   = false;
+    if (navUserPhoto) {
+      navUserPhoto.src = user.photoURL || '';
+      navUserPhoto.alt = user.displayName || 'Profile photo';
+    }
+    if (navUserName) {
+      navUserName.textContent = (user.displayName || '').split(' ')[0];
+    }
+  } else {
+    signInBtn.hidden = false;
+    navUser.hidden   = true;
+  }
+}
+
+// ============================================================
+// JOURNAL
+// ============================================================
+
+function updateAllJournalAreas(user) {
+  document.querySelectorAll('.journal-area').forEach(area => {
+    const cardId = area.dataset.cardId;
+    const prompt = document.getElementById('journal-prompt-' + cardId);
+    const editor = document.getElementById('journal-editor-' + cardId);
+    if (!prompt || !editor) return;
+
+    if (user) {
+      prompt.hidden = true;
+      editor.hidden = false;
+    } else {
+      prompt.hidden = false;
+      editor.hidden = true;
+      const textarea = document.getElementById('journal-textarea-' + cardId);
+      if (textarea) textarea.value = '';
+      const status = document.getElementById('journal-status-' + cardId);
+      if (status) { status.textContent = ''; status.className = 'journal-status'; }
+    }
+  });
+}
+
+function loadAllReflections(uid) {
+  db.collection('reflections').doc(uid).collection('cards').get()
+    .then(snapshot => {
+      snapshot.forEach(doc => {
+        const textarea = document.getElementById('journal-textarea-' + doc.id);
+        if (textarea) textarea.value = doc.data().text || '';
+      });
+    })
+    .catch(err => console.warn('Failed to load reflections:', err.message));
+}
+
+function saveReflection(cardId) {
+  if (!currentUser) return;
+
+  const textarea = document.getElementById('journal-textarea-' + cardId);
+  const statusEl = document.getElementById('journal-status-' + cardId);
+  const saveBtn  = document.getElementById('journal-save-' + cardId);
+  if (!textarea || !statusEl || !saveBtn) return;
+
+  saveBtn.disabled     = true;
+  statusEl.className   = 'journal-status saving';
+  statusEl.textContent = 'Saving…';
+
+  db.collection('reflections')
+    .doc(currentUser.uid)
+    .collection('cards')
+    .doc(cardId)
+    .set({
+      text:      textarea.value,
+      updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+    }, { merge: true })
+    .then(() => {
+      statusEl.className   = 'journal-status saved';
+      statusEl.textContent = 'Saved';
+      saveBtn.disabled = false;
+      setTimeout(() => {
+        if (statusEl.textContent === 'Saved') {
+          statusEl.textContent = '';
+          statusEl.className   = 'journal-status';
+        }
+      }, 3000);
+    })
+    .catch(err => {
+      statusEl.className   = 'journal-status error';
+      statusEl.textContent = 'Error — try again';
+      saveBtn.disabled = false;
+      console.warn('Save error:', err.message);
+    });
+}
+
+function initJournalSaveButtons() {
+  const teenGrid = document.querySelector('.teen-grid');
+  if (!teenGrid) return;
+  teenGrid.addEventListener('click', e => {
+    const btn = e.target.closest('.journal-save-btn');
+    if (btn && btn.dataset.cardId) saveReflection(btn.dataset.cardId);
+  });
+}
+
+// ============================================================
 // INIT
 // ============================================================
 
@@ -363,6 +536,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initTabs();
   initNav();
   initChat();
+  initAuth();
+  initJournalSaveButtons();
 });
 
 // ============================================================
