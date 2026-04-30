@@ -446,6 +446,16 @@ function initChat() {
   const inputArea = document.getElementById('chatInputArea');
   const suggsWrap = document.getElementById('chatSuggestions');
 
+  // Hide the toggle while the hero is visible to prevent overlap with hero buttons
+  const hero = document.getElementById('hero');
+  if (hero) {
+    const obs = new IntersectionObserver(
+      ([entry]) => { toggle.style.opacity = entry.isIntersecting ? '0' : ''; toggle.style.pointerEvents = entry.isIntersecting ? 'none' : ''; },
+      { threshold: 0.1 }
+    );
+    obs.observe(hero);
+  }
+
   if (!toggle) return;
 
   // Probe for backend proxy, then configure UI accordingly
