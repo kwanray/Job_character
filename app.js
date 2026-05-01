@@ -533,12 +533,16 @@ function renderQuizResult() {
       </div>
       <div class="quiz-result-actions">
         <button class="quiz-restart-btn" id="quizRestartBtn">Take it again</button>
+        <button class="quiz-share-btn" id="quizShareBtn">Share your result</button>
         <a href="#for-teens" class="quiz-explore-link">See what Job teaches →</a>
       </div>
       <div class="quiz-save-status" id="quizSaveStatus"></div>
     </div>
   `;
   document.getElementById('quizRestartBtn').addEventListener('click', startQuiz);
+  document.getElementById('quizShareBtn').addEventListener('click', () => shareQuizResult(r.name));
+  localStorage.setItem('job_quiz_done', '1');
+  renderProgressWidget();
   updateQuizSaveStatus();
   if (currentUser) saveQuizResult(winner);
 }
@@ -572,6 +576,23 @@ function updateQuizSaveStatus() {
       e.preventDefault();
       handleGoogleSignIn();
     });
+  }
+}
+
+function shareQuizResult(characterName) {
+  const url  = window.location.href.split('#')[0] + '#quiz';
+  const text = `I got "${characterName}" on the Book of Job quiz — which character are you? `;
+  const btn  = document.getElementById('quizShareBtn');
+
+  if (navigator.share) {
+    navigator.share({ title: 'Which Friend Are You?', text, url }).catch(() => {});
+  } else {
+    navigator.clipboard.writeText(text + url).then(() => {
+      if (!btn) return;
+      const original = btn.textContent;
+      btn.textContent = 'Copied!';
+      setTimeout(() => { btn.textContent = original; }, 2000);
+    }).catch(() => {});
   }
 }
 
@@ -763,6 +784,8 @@ function saveReflection(cardId) {
       statusEl.className   = 'journal-status saved';
       statusEl.textContent = 'Saved';
       saveBtn.disabled = false;
+      localStorage.setItem(`job_journal_${cardId}`, '1');
+      renderProgressWidget();
       setTimeout(() => {
         if (statusEl.textContent === 'Saved') {
           statusEl.textContent = '';
@@ -801,7 +824,183 @@ document.addEventListener('DOMContentLoaded', () => {
   initJournalSaveButtons();
   initQuiz();
   initResources();
+  initMoodChips();
+  initWisdomBites();
+  initProgressTracker();
 });
+
+// ============================================================
+// MOOD ENTRY CHIPS
+// ============================================================
+
+function initMoodChips() {
+  const chips = document.querySelectorAll('.mood-chip');
+  chips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      const cardId = chip.dataset.card;
+      const target = document.getElementById('for-teens');
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+
+      setTimeout(() => {
+        const card = document.querySelector(`.teen-card[data-card-id="${cardId}"]`);
+        if (!card) return;
+        card.classList.add('mood-highlight');
+        card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        setTimeout(() => card.classList.remove('mood-highlight'), 2500);
+      }, 600);
+    });
+  });
+}
+
+// ============================================================
+// WISDOM BITES CAROUSEL
+// ============================================================
+
+const WISDOM_BITES = [
+  {
+    truth: 'You can be theologically right and still deeply wrong.',
+    ref: 'Job 42:7',
+    meaning: 'The friends had correct doctrine but failed Job completely — right theology, catastrophic pastoral care.'
+  },
+  {
+    truth: 'Honest prayers beat polished silence.',
+    ref: 'Job 3; 42:7',
+    meaning: 'God rebuked the friends for their tidy speeches. He did not rebuke Job for his raw, angry lament.'
+  },
+  {
+    truth: 'Sitting in silence is sometimes the best ministry.',
+    ref: 'Job 2:13',
+    meaning: 'The friends did their best work before they opened their mouths — seven days of silent presence.'
+  },
+  {
+    truth: 'Suffering is not evidence of sin.',
+    ref: 'Job 1:1',
+    meaning: 'Job was righteous before, during, and after his losses. Pain is not a report card from God.'
+  },
+  {
+    truth: 'Your grades don\'t define your righteousness.',
+    ref: 'Job 1:8',
+    meaning: 'God called Job blameless — not for his output or performance, but for who he was before God.'
+  },
+  {
+    truth: 'God\'s answer to "why?" is sometimes "who?"',
+    ref: 'Job 38:4',
+    meaning: 'The whirlwind gave Job presence, not propositions. Encounter with God is itself the resolution.'
+  },
+  {
+    truth: 'Doubt directed at God is still faith.',
+    ref: 'Job 7:20',
+    meaning: 'Job cried out to God throughout his suffering — anger and lament are not the same as walking away.'
+  },
+  {
+    truth: 'Be very careful whose advice you take about God.',
+    ref: 'Job 42:7–8',
+    meaning: 'The most theologically confident voices in Job\'s life were the ones God publicly rebuked.'
+  },
+  {
+    truth: 'Some wounds take an eternity to heal.',
+    ref: 'Job 19:25–26',
+    meaning: 'Eschatological resolution: the final account is not closed in this life. Eternity is the last word.'
+  },
+  {
+    truth: 'Disinterested love of God is real — and you can choose it.',
+    ref: 'Job 1:9–10',
+    meaning: 'Satan said genuine faith was impossible. Job\'s endurance under total loss proved him catastrophically wrong.'
+  }
+];
+
+function initWisdomBites() {
+  const track   = document.getElementById('wisdomTrack');
+  const dotsEl  = document.getElementById('wisdomDots');
+  const prevBtn = document.getElementById('wisdomPrev');
+  const nextBtn = document.getElementById('wisdomNext');
+  if (!track) return;
+
+  let current = 0;
+  const total = WISDOM_BITES.length;
+
+  track.innerHTML = WISDOM_BITES.map((b, i) => `
+    <div class="wisdom-card" role="group" aria-label="Wisdom bite ${i + 1} of ${total}">
+      <div class="wisdom-ref">${b.ref}</div>
+      <p class="wisdom-truth">${b.truth}</p>
+      <p class="wisdom-meaning">${b.meaning}</p>
+      <div class="wisdom-counter">${i + 1} / ${total}</div>
+    </div>
+  `).join('');
+
+  dotsEl.innerHTML = WISDOM_BITES.map((_, i) =>
+    `<button class="wisdom-dot${i === 0 ? ' active' : ''}" data-index="${i}" aria-label="Go to bite ${i + 1}"></button>`
+  ).join('');
+
+  function goTo(index) {
+    current = (index + total) % total;
+    track.style.transform = `translateX(-${current * 100}%)`;
+    dotsEl.querySelectorAll('.wisdom-dot').forEach((d, i) =>
+      d.classList.toggle('active', i === current)
+    );
+  }
+
+  prevBtn.addEventListener('click', () => goTo(current - 1));
+  nextBtn.addEventListener('click', () => goTo(current + 1));
+  dotsEl.addEventListener('click', e => {
+    const dot = e.target.closest('.wisdom-dot');
+    if (dot) goTo(Number(dot.dataset.index));
+  });
+
+  // Touch swipe
+  let touchStartX = 0;
+  track.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+  track.addEventListener('touchend', e => {
+    const delta = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(delta) >= 50) goTo(delta > 0 ? current + 1 : current - 1);
+  }, { passive: true });
+}
+
+// ============================================================
+// PROGRESS TRACKER
+// ============================================================
+
+const SECTION_IDS = ['quiz', 'wisdom-bites', 'characters', 'problem-of-evil', 'exposition', 'for-teens', 'resources'];
+const CARD_IDS    = ['academic-pressure', 'family-expectations', 'faith-questions', 'suffering-without-answers', 'watch-who-you-listen-to', 'identity-resilience'];
+
+function getProgress() {
+  const quizDone      = localStorage.getItem('job_quiz_done') === '1';
+  const journalsCount = CARD_IDS.filter(id => localStorage.getItem(`job_journal_${id}`)).length;
+  const sectionsCount = SECTION_IDS.filter(id => localStorage.getItem(`job_visited_${id}`)).length;
+  return { quizDone, journalsCount, sectionsCount };
+}
+
+function renderProgressWidget() {
+  const { quizDone, journalsCount, sectionsCount } = getProgress();
+  const qv = document.getElementById('progressQuizVal');
+  const jv = document.getElementById('progressJournalsVal');
+  const sv = document.getElementById('progressSectionsVal');
+  if (!qv) return;
+  qv.textContent = quizDone ? 'Done ✓' : 'Not yet';
+  qv.className   = 'progress-value' + (quizDone ? ' done' : '');
+  jv.textContent = `${journalsCount} / 6`;
+  jv.className   = 'progress-value' + (journalsCount === 6 ? ' done' : '');
+  sv.textContent = `${sectionsCount} / 7`;
+  sv.className   = 'progress-value' + (sectionsCount === 7 ? ' done' : '');
+}
+
+function initProgressTracker() {
+  renderProgressWidget();
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        localStorage.setItem(`job_visited_${entry.target.id}`, '1');
+        renderProgressWidget();
+      }
+    });
+  }, { threshold: 0.3 });
+
+  SECTION_IDS.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) observer.observe(el);
+  });
+}
 
 // ============================================================
 // USEFUL RESOURCES

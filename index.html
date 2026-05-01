@@ -21,6 +21,7 @@
       </button>
       <ul class="nav-links" id="navLinks">
         <li><a href="#quiz" class="nav-link">Quiz</a></li>
+        <li><a href="#wisdom-bites" class="nav-link">Wisdom Bites</a></li>
         <li><a href="#characters" class="nav-link">Characters</a></li>
         <li><a href="#problem-of-evil" class="nav-link">Problem of Evil</a></li>
         <li><a href="#exposition" class="nav-link">Geisler's Exposition</a></li>
@@ -58,6 +59,17 @@
         <a href="#quiz" class="btn-primary">Discover Yourself First</a>
         <a href="#characters" class="btn-secondary">Meet the Characters</a>
       </div>
+      <div class="mood-chips">
+        <span class="mood-label">What are you going through?</span>
+        <div class="mood-chip-row">
+          <button class="mood-chip" data-card="academic-pressure">📚 Exam stress</button>
+          <button class="mood-chip" data-card="faith-questions">🤔 Doubting my faith</button>
+          <button class="mood-chip" data-card="family-expectations">👨‍👩‍👦 Family pressure</button>
+          <button class="mood-chip" data-card="suffering-without-answers">🌑 Suffering, no answers</button>
+          <button class="mood-chip" data-card="watch-who-you-listen-to">📱 Confused by advice</button>
+          <button class="mood-chip" data-card="identity-resilience">✊ Don't know who I am</button>
+        </div>
+      </div>
     </div>
     <div class="hero-scroll">
       <span>Scroll to explore</span>
@@ -77,6 +89,25 @@
       <div id="quizContainer" class="quiz-container">
         <!-- Rendered by app.js -->
       </div>
+    </div>
+  </section>
+
+  <!-- Wisdom Bites Section -->
+  <section id="wisdom-bites" class="section-dark">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Bite-Sized Truths</span>
+        <h2>Wisdom Bites</h2>
+        <p class="section-desc">Ten truths from the Book of Job — one swipe at a time.</p>
+      </div>
+      <div class="wisdom-carousel" id="wisdomCarousel">
+        <div class="wisdom-track" id="wisdomTrack">
+          <!-- Rendered by app.js -->
+        </div>
+        <button class="wisdom-nav wisdom-prev" id="wisdomPrev" aria-label="Previous">&#8592;</button>
+        <button class="wisdom-nav wisdom-next" id="wisdomNext" aria-label="Next">&#8594;</button>
+      </div>
+      <div class="wisdom-dots" id="wisdomDots"></div>
     </div>
   </section>
 
@@ -396,6 +427,24 @@
         <p class="section-desc">Written for Christian teenagers in Singapore — but if you're wrestling with suffering, pressure, and faith, this is for you too. Job's questions are timeless.</p>
       </div>
 
+      <div class="progress-widget" id="progressWidget">
+        <div class="progress-item" id="progressQuiz">
+          <span class="progress-icon">🎯</span>
+          <span class="progress-label">Quiz</span>
+          <span class="progress-value" id="progressQuizVal">Not yet</span>
+        </div>
+        <div class="progress-item" id="progressJournals">
+          <span class="progress-icon">✍️</span>
+          <span class="progress-label">Journals</span>
+          <span class="progress-value" id="progressJournalsVal">0 / 6</span>
+        </div>
+        <div class="progress-item" id="progressSections">
+          <span class="progress-icon">📖</span>
+          <span class="progress-label">Sections visited</span>
+          <span class="progress-value" id="progressSectionsVal">0 / 7</span>
+        </div>
+      </div>
+
       <div class="teen-grid">
 
         <div class="teen-card" data-card-id="academic-pressure">
@@ -600,6 +649,7 @@
           <h4>Navigate</h4>
           <ul>
             <li><a href="#quiz">Quiz</a></li>
+            <li><a href="#wisdom-bites">Wisdom Bites</a></li>
             <li><a href="#characters">Characters</a></li>
             <li><a href="#problem-of-evil">Problem of Evil</a></li>
             <li><a href="#exposition">Geisler's Exposition</a></li>
