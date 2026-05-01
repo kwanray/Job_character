@@ -6,6 +6,46 @@
 
 const characters = [
   {
+    id: 'god',
+    imgSrc: 'img/god.png',
+    name: 'God (Yahweh)',
+    role: 'The Sovereign Creator',
+    teaser: 'His answer is not an explanation — it is an encounter. "Where were you when I laid the foundation of the earth?"',
+    verdictClass: 'verdict-sovereign',
+    verdictText: 'The Final Word',
+    cardClass: 'char-god',
+    sectionTitle: 'Divine Perspective',
+    worldview: [
+      'God speaks from the whirlwind in chapters 38–41 — and what he says defies every expectation. He does not explain the cosmic wager to Job. He does not justify his actions. He does not offer a philosophical theodicy. Instead, he asks questions: seventy-seven rhetorical questions about the foundations of the earth, the ordinances of the stars, the rain and the lightning, the wild ox and the war horse.',
+      '"Where were you when I laid the foundation of the earth? Tell me, if you have understanding" (Job 38:4). The point is not humiliation — it is expansion. Job\'s framework for understanding his suffering is too small. God\'s response invites him into a far larger view of reality, one in which God\'s governance of all things — including chaos itself, symbolised by Behemoth and Leviathan — is the context in which Job\'s suffering must be understood.',
+      'The resolution comes not through argument but through encounter. Job\'s response in 42:5 says everything: "My ears had heard of you, but now my eyes have seen you." Not: "Now I understand why I suffered." But: "Now I have seen you." The crisis is resolved by presence, not propositions.'
+    ],
+    keyPosition: 'Sovereign, transcendent, personally engaged. The answer to suffering is not an explanation but an encounter with the living God. Bigger view of God = greater capacity to bear what cannot be explained.',
+    verseText: '"Where were you when I laid the foundation of the earth? Tell me, if you have understanding."',
+    verseRef: 'Job 38:4',
+    geislerVerdict: 'Geisler\'s central interpretive claim: God\'s whirlwind speech is intentionally non-propositional because the real problem was never primarily intellectual — it was the adequacy of Job\'s vision of God. Once that is enlarged through direct encounter, the suffering can be borne. God vindicates Job against the friends, restores him doubly, and accepts Job\'s intercession on their behalf. The epilogue demonstrates God\'s ultimate redemptive intention.'
+  },
+  {
+    id: 'satan',
+    imgSrc: 'img/satan.png',
+    name: 'Satan',
+    role: 'The Cynical Accuser',
+    teaser: '"Does Job fear God for nothing?" — The adversary\'s challenge is the engine of the entire book. The narrative proves him catastrophically wrong.',
+    verdictClass: 'verdict-refuted',
+    verdictText: 'Refuted by Job',
+    cardClass: 'char-satan',
+    sectionTitle: "Satan's Accusation",
+    worldview: [
+      'The Hebrew term here is "ha-satan" — the accuser or adversary — a prosecutorial figure in the heavenly court, not the fully developed devil of later New Testament theology. His function in the narrative is to challenge the authenticity of Job\'s faith on the most cynical possible grounds: "Does Job fear God for nothing?" (1:9).',
+      'His argument is philosophically serious: all religious devotion, he suggests, is ultimately self-interested. Job loves God because God has built a hedge of protection around him, blessed his family, multiplied his possessions. Remove the hedge — remove the blessings — and Job will curse God to his face. Faith, on this view, is always transactional. The adversary is essentially making the claim that disinterested love of God does not exist; that all devotion is at root a sophisticated self-preservation strategy.',
+      'The narrative answers him decisively. Job loses everything — wealth, children, health — and in Job 2:10 he still says: "Shall we accept good from God, and not trouble?" The adversary\'s hypothesis is falsified. Job curses the day of his birth (chapter 3), argues bitterly with God, and comes close to the edge — but he never finally curses God. The existence of disinterested faith is proved.'
+    ],
+    keyPosition: 'Cynical transactionalism: all religious faith is self-interested. Love God only because of what he gives. Remove the blessings and the faith collapses. Authentic devotion is impossible.',
+    verseText: '"Does Job fear God for nothing? Have you not put a hedge around him and his household and everything he has?"',
+    verseRef: 'Job 1:9–10',
+    geislerVerdict: 'Geisler reads the adversary\'s challenge as philosophically significant beyond its narrative function. It anticipates modern critiques of religious faith as merely instrumental — a psychological coping mechanism, a socially enforced custom, a rational calculation of divine patronage. Job\'s endurance under total loss is the narrative\'s direct rebuttal. Disinterested faith — loving God for who he is, not what he gives — exists. Job demonstrated it. The accuser\'s cynicism was wrong.'
+  },
+  {
     id: 'job',
     imgSrc: 'img/job.png',
     name: 'Job',
@@ -99,46 +139,24 @@ const characters = [
     verseText: '"For God speaks in one way, and in two, though man does not perceive it... to turn man aside from his deed and conceal pride from a man."',
     verseRef: 'Job 33:14, 17',
     geislerVerdict: 'Critically, God does not rebuke Elihu in chapter 42 — only the three friends. Geisler interprets this as a sign that Elihu\'s theology is directionally correct, even if incomplete. He is the book\'s transitional figure — theologically between the failed retributionism of the three friends and the divine revelation from the whirlwind. His closing speech, with its language of God thundering in creation, directly prepares for the voice in chapter 38.'
-  },
-  {
-    id: 'god',
-    imgSrc: 'img/god.png',
-    name: 'God (Yahweh)',
-    role: 'The Sovereign Creator',
-    teaser: 'His answer is not an explanation — it is an encounter. "Where were you when I laid the foundation of the earth?"',
-    verdictClass: 'verdict-sovereign',
-    verdictText: 'The Final Word',
-    cardClass: 'char-god',
-    sectionTitle: 'Divine Perspective',
+  }
+];
+    imgSrc: 'img/job.png',
+    name: 'Job',
+    role: 'The Righteous Sufferer',
+    teaser: 'A man of unmatched integrity who refuses to stay silent — and whose honest wrestling God calls more righteous than polished orthodoxy.',
+    verdictClass: 'verdict-vindicated',
+    verdictText: 'Vindicated by God',
+    cardClass: '',
     worldview: [
-      'God speaks from the whirlwind in chapters 38–41 — and what he says defies every expectation. He does not explain the cosmic wager to Job. He does not justify his actions. He does not offer a philosophical theodicy. Instead, he asks questions: seventy-seven rhetorical questions about the foundations of the earth, the ordinances of the stars, the rain and the lightning, the wild ox and the war horse.',
-      '"Where were you when I laid the foundation of the earth? Tell me, if you have understanding" (Job 38:4). The point is not humiliation — it is expansion. Job\'s framework for understanding his suffering is too small. God\'s response invites him into a far larger view of reality, one in which God\'s governance of all things — including chaos itself, symbolised by Behemoth and Leviathan — is the context in which Job\'s suffering must be understood.',
-      'The resolution comes not through argument but through encounter. Job\'s response in 42:5 says everything: "My ears had heard of you, but now my eyes have seen you." Not: "Now I understand why I suffered." But: "Now I have seen you." The crisis is resolved by presence, not propositions.'
+      'Job believes in his own innocence. He is not claiming perfection — but he knows his suffering is disproportionate to any sin he has committed. Rather than accepting his friends\' retributive framework, he insists on arguing his case before God directly. Faith expressed through lament, not silence.',
+      'Job\'s theology is not comfortable. He accuses God of hiding, of being his enemy, of treating him unjustly — and yet he never finally lets go of God. His complaint is not rebellion; it is trust. Only someone who believes God is real and worth arguing with continues to argue. The cynic simply walks away.',
+      'As his speeches progress, Job occasionally tips into self-righteousness (chapters 29–31), painting himself as a paragon of virtue. This is where Elihu\'s correction becomes important. But the core of Job\'s position — that suffering is not always punishment, and that God can be approached with unvarnished honesty — is precisely what God vindicates.'
     ],
-    keyPosition: 'Sovereign, transcendent, personally engaged. The answer to suffering is not an explanation but an encounter with the living God. Bigger view of God = greater capacity to bear what cannot be explained.',
-    verseText: '"Where were you when I laid the foundation of the earth? Tell me, if you have understanding."',
-    verseRef: 'Job 38:4',
-    geislerVerdict: 'Geisler\'s central interpretive claim: God\'s whirlwind speech is intentionally non-propositional because the real problem was never primarily intellectual — it was the adequacy of Job\'s vision of God. Once that is enlarged through direct encounter, the suffering can be borne. God vindicates Job against the friends, restores him doubly, and accepts Job\'s intercession on their behalf. The epilogue demonstrates God\'s ultimate redemptive intention.'
-  },
-  {
-    id: 'satan',
-    imgSrc: 'img/satan.png',
-    name: 'Satan',
-    role: 'The Cynical Accuser',
-    teaser: '"Does Job fear God for nothing?" — The adversary\'s challenge is the engine of the entire book. The narrative proves him catastrophically wrong.',
-    verdictClass: 'verdict-refuted',
-    verdictText: 'Refuted by Job',
-    cardClass: 'char-satan',
-    sectionTitle: "Satan's Accusation",
-    worldview: [
-      'The Hebrew term here is "ha-satan" — the accuser or adversary — a prosecutorial figure in the heavenly court, not the fully developed devil of later New Testament theology. His function in the narrative is to challenge the authenticity of Job\'s faith on the most cynical possible grounds: "Does Job fear God for nothing?" (1:9).',
-      'His argument is philosophically serious: all religious devotion, he suggests, is ultimately self-interested. Job loves God because God has built a hedge of protection around him, blessed his family, multiplied his possessions. Remove the hedge — remove the blessings — and Job will curse God to his face. Faith, on this view, is always transactional. The adversary is essentially making the claim that disinterested love of God does not exist; that all devotion is at root a sophisticated self-preservation strategy.',
-      'The narrative answers him decisively. Job loses everything — wealth, children, health — and in Job 2:10 he still says: "Shall we accept good from God, and not trouble?" The adversary\'s hypothesis is falsified. Job curses the day of his birth (chapter 3), argues bitterly with God, and comes close to the edge — but he never finally curses God. The existence of disinterested faith is proved.'
-    ],
-    keyPosition: 'Cynical transactionalism: all religious faith is self-interested. Love God only because of what he gives. Remove the blessings and the faith collapses. Authentic devotion is impossible.',
-    verseText: '"Does Job fear God for nothing? Have you not put a hedge around him and his household and everything he has?"',
-    verseRef: 'Job 1:9–10',
-    geislerVerdict: 'Geisler reads the adversary\'s challenge as philosophically significant beyond its narrative function. It anticipates modern critiques of religious faith as merely instrumental — a psychological coping mechanism, a socially enforced custom, a rational calculation of divine patronage. Job\'s endurance under total loss is the narrative\'s direct rebuttal. Disinterested faith — loving God for who he is, not what he gives — exists. Job demonstrated it. The accuser\'s cynicism was wrong.'
+    keyPosition: 'Suffering is not always punishment. God can be approached honestly, even in anger and grief. Honest lament is more faithful than performed contentment.',
+    verseText: '"Though he slay me, I will hope in him; yet I will argue my ways to his face."',
+    verseRef: 'Job 13:15',
+    geislerVerdict: 'God\'s direct verdict in Job 42:7 vindicates Job: "You have not spoken of me what is right, as my servant Job has." Geisler sees Job as the model for authentic faith — the kind that doesn\'t pretend everything is fine when it isn\'t. Job\'s honest wrestling, for all its rawness, was more righteous before God than the friends\' tidy, confident orthodoxy. This is one of the most unsettling and freeing claims in all of Scripture.'
   }
 ];
 
