@@ -631,6 +631,15 @@ function initNav() {
         document.body.classList.remove('nav-open');
       });
     });
+
+    // Close when tapping the overlay background
+    navLinks.addEventListener('click', e => {
+      if (e.target === navLinks) {
+        navLinks.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+        document.body.classList.remove('nav-open');
+      }
+    });
   }
 }
 
