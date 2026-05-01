@@ -2207,6 +2207,37 @@ section {
   color: var(--gold-light);
 }
 
+.quiz-save-status {
+  margin-top: 1.25rem;
+  text-align: center;
+  min-height: 2rem;
+}
+
+.quiz-save-success {
+  font-size: 0.82rem;
+  color: #4cc96e;
+  font-style: italic;
+}
+
+.quiz-save-prompt {
+  display: inline-block;
+  font-size: 0.82rem;
+  color: var(--text-dim);
+  border: 1px dashed rgba(255,255,255,0.12);
+  border-radius: var(--radius);
+  padding: 0.5rem 1rem;
+}
+
+.quiz-signin-link {
+  color: var(--gold);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.quiz-signin-link:hover {
+  color: var(--gold-light);
+}
+
 /* ---- Mobile ---- */
 @media (max-width: 600px) {
   .quiz-question,

@@ -422,7 +422,8 @@ let quizState = {
   currentQuestion: 0,
   scores: { eliphaz: 0, bildad: 0, zophar: 0, job: 0 },
   started: false,
-  finished: false
+  finished: false,
+  winner: null
 };
 
 function initQuiz() {
@@ -512,6 +513,7 @@ function renderQuizResult() {
   quizState.finished = true;
   const s = quizState.scores;
   const winner = Object.keys(s).reduce((a, b) => s[a] >= s[b] ? a : b);
+  quizState.winner = winner;
   const r = QUIZ_RESULTS[winner];
   const container = document.getElementById('quizContainer');
 
@@ -533,9 +535,44 @@ function renderQuizResult() {
         <button class="quiz-restart-btn" id="quizRestartBtn">Take it again</button>
         <a href="#for-teens" class="quiz-explore-link">See what Job teaches →</a>
       </div>
+      <div class="quiz-save-status" id="quizSaveStatus"></div>
     </div>
   `;
   document.getElementById('quizRestartBtn').addEventListener('click', startQuiz);
+  updateQuizSaveStatus();
+  if (currentUser) saveQuizResult(winner);
+}
+
+function saveQuizResult(winner) {
+  if (!currentUser || !winner) return;
+  const r = QUIZ_RESULTS[winner];
+  db.collection('reflections').doc(currentUser.uid)
+    .collection('quiz').doc('result')
+    .set({
+      character: winner,
+      characterName: r.name,
+      scores: quizState.scores,
+      completedAt: firebase.firestore.FieldValue.serverTimestamp()
+    })
+    .catch(err => console.warn('Quiz save error:', err.message));
+}
+
+function updateQuizSaveStatus() {
+  const el = document.getElementById('quizSaveStatus');
+  if (!el) return;
+  if (currentUser) {
+    el.innerHTML = `<span class="quiz-save-success">&#10003; Result saved to your account</span>`;
+  } else {
+    el.innerHTML = `
+      <div class="quiz-save-prompt">
+        <span>&#128274; <a href="#" class="quiz-signin-link" id="quizSignInLink">Sign in</a> to save your result</span>
+      </div>
+    `;
+    document.getElementById('quizSignInLink').addEventListener('click', e => {
+      e.preventDefault();
+      handleGoogleSignIn();
+    });
+  }
 }
 
 // ============================================================
@@ -616,7 +653,15 @@ function initAuth() {
     currentUser = user;
     updateNavAuthUI(user);
     updateAllJournalAreas(user);
-    if (user) loadAllReflections(user.uid);
+    if (user) {
+      loadAllReflections(user.uid);
+      if (quizState.finished && quizState.winner) {
+        saveQuizResult(quizState.winner);
+        updateQuizSaveStatus();
+      }
+    } else {
+      updateQuizSaveStatus();
+    }
   });
 }
 
