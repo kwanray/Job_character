@@ -361,12 +361,12 @@ function initNav() {
 // ============================================================
 
 const FIREBASE_CONFIG = {
-  apiKey:            'REPLACE_WITH_YOUR_API_KEY',
-  authDomain:        'REPLACE_WITH_YOUR_AUTH_DOMAIN',
-  projectId:         'REPLACE_WITH_YOUR_PROJECT_ID',
-  storageBucket:     'REPLACE_WITH_YOUR_STORAGE_BUCKET',
-  messagingSenderId: 'REPLACE_WITH_YOUR_MESSAGING_SENDER_ID',
-  appId:             'REPLACE_WITH_YOUR_APP_ID'
+  apiKey:            'AIzaSyCFZlkU_YQ_2wLUAZBEYQ3TJq4hW4Lyesg',
+  authDomain:        'job-characters.firebaseapp.com',
+  projectId:         'job-characters',
+  storageBucket:     'job-characters.firebasestorage.app',
+  messagingSenderId: '400988942235',
+  appId:             '1:400988942235:web:11477212bb67dfd016fb3e'
 };
 
 firebase.initializeApp(FIREBASE_CONFIG);
