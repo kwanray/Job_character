@@ -141,24 +141,6 @@ const characters = [
     geislerVerdict: 'Critically, God does not rebuke Elihu in chapter 42 — only the three friends. Geisler interprets this as a sign that Elihu\'s theology is directionally correct, even if incomplete. He is the book\'s transitional figure — theologically between the failed retributionism of the three friends and the divine revelation from the whirlwind. His closing speech, with its language of God thundering in creation, directly prepares for the voice in chapter 38.'
   }
 ];
-    imgSrc: 'img/job.png',
-    name: 'Job',
-    role: 'The Righteous Sufferer',
-    teaser: 'A man of unmatched integrity who refuses to stay silent — and whose honest wrestling God calls more righteous than polished orthodoxy.',
-    verdictClass: 'verdict-vindicated',
-    verdictText: 'Vindicated by God',
-    cardClass: '',
-    worldview: [
-      'Job believes in his own innocence. He is not claiming perfection — but he knows his suffering is disproportionate to any sin he has committed. Rather than accepting his friends\' retributive framework, he insists on arguing his case before God directly. Faith expressed through lament, not silence.',
-      'Job\'s theology is not comfortable. He accuses God of hiding, of being his enemy, of treating him unjustly — and yet he never finally lets go of God. His complaint is not rebellion; it is trust. Only someone who believes God is real and worth arguing with continues to argue. The cynic simply walks away.',
-      'As his speeches progress, Job occasionally tips into self-righteousness (chapters 29–31), painting himself as a paragon of virtue. This is where Elihu\'s correction becomes important. But the core of Job\'s position — that suffering is not always punishment, and that God can be approached with unvarnished honesty — is precisely what God vindicates.'
-    ],
-    keyPosition: 'Suffering is not always punishment. God can be approached honestly, even in anger and grief. Honest lament is more faithful than performed contentment.',
-    verseText: '"Though he slay me, I will hope in him; yet I will argue my ways to his face."',
-    verseRef: 'Job 13:15',
-    geislerVerdict: 'God\'s direct verdict in Job 42:7 vindicates Job: "You have not spoken of me what is right, as my servant Job has." Geisler sees Job as the model for authentic faith — the kind that doesn\'t pretend everything is fine when it isn\'t. Job\'s honest wrestling, for all its rawness, was more righteous before God than the friends\' tidy, confident orthodoxy. This is one of the most unsettling and freeing claims in all of Scripture.'
-  }
-];
 
 // ============================================================
 // RENDER CHARACTER CARDS
