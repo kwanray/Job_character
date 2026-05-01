@@ -436,7 +436,7 @@ function renderQuizIntro() {
   const container = document.getElementById('quizContainer');
   container.innerHTML = `
     <div class="quiz-intro">
-      <div class="quiz-intro-icon">🪞</div>
+      <img class="quiz-intro-icon" src="img/quiz.png" alt="Which Friend Are You?">
       <h3 class="quiz-intro-title">When a friend is suffering — what do you actually say?</h3>
       <p class="quiz-intro-desc">Five scenarios. Four responses each. Your pattern will reveal which character from the Book of Job you most resemble — and what that means for how you care for people.</p>
       <p class="quiz-intro-time">⏱ About 2 minutes</p>

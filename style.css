@@ -1893,9 +1893,12 @@ section {
 }
 
 .quiz-intro-icon {
-  font-size: 3rem;
-  margin-bottom: 1rem;
-  line-height: 1;
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid var(--gold);
+  margin-bottom: 1.25rem;
 }
 
 .quiz-intro-title {
