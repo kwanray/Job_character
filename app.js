@@ -323,6 +323,222 @@ function initTabs() {
 }
 
 // ============================================================
+// QUIZ — WHICH FRIEND ARE YOU?
+// ============================================================
+
+const QUIZ_QUESTIONS = [
+  {
+    scenario: 'O-Level Results Day',
+    question: 'Your classmate just opened their results slip and failed. They\'re in shock, staring at the paper. What do you say?',
+    options: [
+      { text: '"God must be trying to teach you something through this. Maybe it\'s a sign to reflect on your priorities."', character: 'eliphaz' },
+      { text: '"The Bible says God works all things for good. Just trust His plan — this isn\'t the end."', character: 'bildad' },
+      { text: '"Maybe there\'s something in your life that\'s been blocking God\'s blessing. Have you thought about that?"', character: 'zophar' },
+      { text: '"I\'m so sorry. I don\'t have the right words. I\'m just going to sit here with you."', character: 'job' }
+    ]
+  },
+  {
+    scenario: 'The Comparison Parent',
+    question: 'Your friend\'s mum just said in front of you: "Your cousin got into NUS Medicine. Why can\'t you be more like her?" Your friend goes silent. What do you say later?',
+    options: [
+      { text: '"Your mum just wants the best for you. God has a unique path for everyone — maybe medicine isn\'t yours."', character: 'eliphaz' },
+      { text: '"Honour your father and mother. There might be something worth taking from what she said."', character: 'bildad' },
+      { text: '"Are you sure you\'ve been putting in the effort God expects? Sometimes pressure like this comes for a reason."', character: 'zophar' },
+      { text: '"What your mum said wasn\'t fair. Your worth has nothing to do with your cousin\'s results. How are you feeling?"', character: 'job' }
+    ]
+  },
+  {
+    scenario: 'The Unanswered Prayer',
+    question: 'A cell group friend has been praying for months for their parents\' marriage — but things are getting worse. They say: "Maybe God doesn\'t actually listen." What do you say?',
+    options: [
+      { text: '"I\'ve seen God answer prayers in amazing ways. He\'s listening — maybe the answer just looks different than you expect."', character: 'eliphaz' },
+      { text: '"Pastor always says God answers — yes, no, or wait. Keep praying and trust the process."', character: 'bildad' },
+      { text: '"Sometimes unanswered prayer means there\'s something we need to deal with first. Have you checked your heart?"', character: 'zophar' },
+      { text: '"I don\'t know why God hasn\'t answered. That question is real and it\'s okay to ask it. Job asked it too."', character: 'job' }
+    ]
+  },
+  {
+    scenario: 'The Prosperity Gospel Post',
+    question: 'A church leader posts on Instagram: "I prayed, I trusted God — and He blessed me with a business breakthrough! Faithful Christians are blessed 🙏" Your struggling friend screenshots it to you. What do you reply?',
+    options: [
+      { text: '"There\'s truth in that — God does bless faithfulness. Encourage your friend to keep praying and trusting."', character: 'eliphaz' },
+      { text: '"Well, that\'s what the church has always taught — obedience and blessing go together."', character: 'bildad' },
+      { text: '"If someone isn\'t being blessed, maybe they need to examine whether their faith is genuine."', character: 'zophar' },
+      { text: '"That post worries me. Job was the most faithful man alive and lost everything. This is exactly what God rebuked his friends for saying."', character: 'job' }
+    ]
+  },
+  {
+    scenario: 'The Quiet Crisis',
+    question: 'A close friend confesses they haven\'t been able to pray or feel anything for weeks. They\'re spiritually numb but afraid to tell anyone at church. What do you say?',
+    options: [
+      { text: '"I\'ve been through that dryness too. Worship music really helped me — have you tried that?"', character: 'eliphaz' },
+      { text: '"Our church has a prayer ministry for exactly this. You should speak to the pastor — that\'s what they\'re there for."', character: 'bildad' },
+      { text: '"Spiritual numbness like that is often a sign of something deeper. You need to get to the root cause."', character: 'zophar' },
+      { text: '"Thank you for trusting me with this. You don\'t have to fix it or perform. God didn\'t rebuke Job for going quiet — He rebuked the friends who demanded answers."', character: 'job' }
+    ]
+  }
+];
+
+const QUIZ_RESULTS = {
+  eliphaz: {
+    name: 'Eliphaz',
+    label: 'The Compassionate Explainer',
+    summary: 'You mean well — and people feel that warmth. But when someone is hurting, your instinct is to offer an explanation or a silver lining.',
+    detail: 'Job\'s friends said beautiful things about God. God still rebuked them. Truth deployed as comfort — without genuine presence — becomes a wall between you and the person you\'re trying to help. What Job needed wasn\'t an explanation. It was someone who stayed.',
+    challenge: 'Next time a friend is in pain, try going 10 minutes without offering a reason or solution. Just be there.',
+    verdictClass: 'verdict-wrong',
+    imgSrc: 'img/eliphaz.png'
+  },
+  bildad: {
+    name: 'Bildad',
+    label: 'The Tradition Keeper',
+    summary: 'You reach for what the church has taught, what the pastor has said, what Scripture promises — trying to anchor people to something solid.',
+    detail: 'That instinct isn\'t wrong. But tradition applied without discernment can wound. Bildad quoted the ancestors confidently — and was rebuked by God. The question isn\'t whether your theology is correct. It\'s whether it fits this specific person in this specific moment.',
+    challenge: 'Before quoting Scripture to a hurting friend, ask yourself: "Is this what they need right now, or what I need to say?"',
+    verdictClass: 'verdict-wrong',
+    imgSrc: 'img/bildad.png'
+  },
+  zophar: {
+    name: 'Zophar',
+    label: 'The Confident Diagnoster',
+    summary: 'You believe in cause and effect, and you\'re willing to say hard things others won\'t. That takes a kind of courage.',
+    detail: 'But Zophar was the harshest of the three friends — and the most wrong. Implying fault when someone is suffering is the deepest pastoral wound the Book of Job warns against. God called it speaking wrongly about Him. Real courage in friendship means staying present in uncertainty — not solving it.',
+    challenge: 'When you notice yourself looking for the reason behind someone\'s suffering, ask: "Did God actually ask me to find it?"',
+    verdictClass: 'verdict-wrong',
+    imgSrc: 'img/zophar.png'
+  },
+  job: {
+    name: 'Job',
+    label: 'The Honest Companion',
+    summary: 'You don\'t pretend to have answers you don\'t have. You stay. You make room for the question rather than rushing to close it.',
+    detail: 'That\'s exactly what Job modelled — and what God called more righteous than the friends\' polished answers. This doesn\'t mean you never speak truth. It means you earn the right to speak it by being present first. The church needs more people with this instinct.',
+    challenge: 'Keep going. And when you find yourself giving a Zophar answer on a bad day — because we all do — come back to Job 42:7.',
+    verdictClass: 'verdict-vindicated',
+    imgSrc: 'img/job.png'
+  }
+};
+
+let quizState = {
+  currentQuestion: 0,
+  scores: { eliphaz: 0, bildad: 0, zophar: 0, job: 0 },
+  started: false,
+  finished: false
+};
+
+function initQuiz() {
+  const container = document.getElementById('quizContainer');
+  if (!container) return;
+  renderQuizIntro();
+}
+
+function renderQuizIntro() {
+  const container = document.getElementById('quizContainer');
+  container.innerHTML = `
+    <div class="quiz-intro">
+      <div class="quiz-intro-icon">🪞</div>
+      <h3 class="quiz-intro-title">When a friend is suffering — what do you actually say?</h3>
+      <p class="quiz-intro-desc">Five scenarios. Four responses each. Your pattern will reveal which character from the Book of Job you most resemble — and what that means for how you care for people.</p>
+      <p class="quiz-intro-time">⏱ About 2 minutes</p>
+      <button class="quiz-start-btn" id="quizStartBtn">Start the Quiz</button>
+    </div>
+  `;
+  document.getElementById('quizStartBtn').addEventListener('click', startQuiz);
+}
+
+function startQuiz() {
+  quizState = {
+    currentQuestion: 0,
+    scores: { eliphaz: 0, bildad: 0, zophar: 0, job: 0 },
+    started: true,
+    finished: false
+  };
+  renderQuizQuestion();
+}
+
+function renderQuizQuestion() {
+  const container = document.getElementById('quizContainer');
+  const q = QUIZ_QUESTIONS[quizState.currentQuestion];
+  const total = QUIZ_QUESTIONS.length;
+  const current = quizState.currentQuestion + 1;
+  const progressPct = ((current - 1) / total) * 100;
+
+  const shuffled = [...q.options].sort(() => Math.random() - 0.5);
+
+  container.innerHTML = `
+    <div class="quiz-question">
+      <div class="quiz-progress-wrap">
+        <div class="quiz-progress-bar">
+          <div class="quiz-progress-fill" style="width:${progressPct}%"></div>
+        </div>
+        <span class="quiz-progress-label">${current} / ${total}</span>
+      </div>
+      <div class="quiz-scenario-tag">${q.scenario}</div>
+      <p class="quiz-q-text">${q.question}</p>
+      <div class="quiz-options">
+        ${shuffled.map((opt, i) => `
+          <button class="quiz-option" data-character="${opt.character}">
+            <span class="quiz-option-letter">${String.fromCharCode(65 + i)}</span>
+            <span class="quiz-option-text">${opt.text}</span>
+          </button>
+        `).join('')}
+      </div>
+    </div>
+  `;
+
+  document.querySelectorAll('.quiz-option').forEach(btn => {
+    btn.addEventListener('click', () => handleQuizAnswer(btn.dataset.character, btn));
+  });
+}
+
+function handleQuizAnswer(character, clickedBtn) {
+  document.querySelectorAll('.quiz-option').forEach(btn => {
+    btn.disabled = true;
+    btn.classList.add('quiz-option--disabled');
+  });
+  clickedBtn.classList.add('quiz-option--selected');
+  quizState.scores[character]++;
+
+  setTimeout(() => {
+    quizState.currentQuestion++;
+    if (quizState.currentQuestion >= QUIZ_QUESTIONS.length) {
+      renderQuizResult();
+    } else {
+      renderQuizQuestion();
+    }
+  }, 550);
+}
+
+function renderQuizResult() {
+  quizState.finished = true;
+  const s = quizState.scores;
+  const winner = Object.keys(s).reduce((a, b) => s[a] >= s[b] ? a : b);
+  const r = QUIZ_RESULTS[winner];
+  const container = document.getElementById('quizContainer');
+
+  container.innerHTML = `
+    <div class="quiz-result">
+      <p class="quiz-result-eyebrow">You are most like…</p>
+      <div class="quiz-result-card">
+        <img class="quiz-result-img" src="${r.imgSrc}" alt="${r.name}">
+        <h3 class="quiz-result-name">${r.name}</h3>
+        <span class="quiz-result-label ${r.verdictClass}">${r.label}</span>
+        <p class="quiz-result-summary">${r.summary}</p>
+        <p class="quiz-result-detail">${r.detail}</p>
+        <div class="quiz-result-challenge">
+          <span class="quiz-challenge-heading">One thing to try</span>
+          <p>${r.challenge}</p>
+        </div>
+      </div>
+      <div class="quiz-result-actions">
+        <button class="quiz-restart-btn" id="quizRestartBtn">Take it again</button>
+        <a href="#for-teens" class="quiz-explore-link">See what Job teaches →</a>
+      </div>
+    </div>
+  `;
+  document.getElementById('quizRestartBtn').addEventListener('click', startQuiz);
+}
+
+// ============================================================
 // STICKY NAV
 // ============================================================
 
@@ -538,6 +754,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initChat();
   initAuth();
   initJournalSaveButtons();
+  initQuiz();
 });
 
 // ============================================================
