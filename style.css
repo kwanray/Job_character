@@ -2256,3 +2256,187 @@ section {
     font-size: 1.5rem;
   }
 }
+
+/* ============================================================
+   USEFUL RESOURCES
+   ============================================================ */
+
+#resources {
+  padding: 5rem 0;
+  background: var(--bg);
+}
+
+/* ---- Filter chips ---- */
+.resource-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-bottom: 2.5rem;
+}
+
+.resource-filter-btn {
+  background: var(--surface-2);
+  border: 1px solid var(--border-subtle);
+  border-radius: 2rem;
+  padding: 0.45rem 1.1rem;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: background var(--transition), border-color var(--transition), color var(--transition);
+}
+
+.resource-filter-btn:hover {
+  border-color: rgba(240, 165, 0, 0.35);
+  color: var(--text);
+}
+
+.resource-filter-btn.active {
+  background: rgba(240, 165, 0, 0.12);
+  border-color: var(--gold);
+  color: var(--gold);
+  font-weight: 600;
+}
+
+/* ---- Card grid ---- */
+.resources-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.resource-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+}
+
+.resource-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(240, 165, 0, 0.3);
+  box-shadow: var(--shadow-lg);
+}
+
+/* ---- Thumbnail ---- */
+.resource-thumb {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: var(--bg-dark);
+}
+
+.resource-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.resource-card:hover .resource-thumb img {
+  transform: scale(1.04);
+}
+
+.resource-play {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.35);
+  font-size: 1.6rem;
+  color: #fff;
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+
+.resource-card:hover .resource-play {
+  opacity: 1;
+}
+
+.resource-duration {
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0.5rem;
+  background: rgba(0, 0, 0, 0.78);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+  letter-spacing: 0.02em;
+}
+
+/* ---- Card info ---- */
+.resource-info {
+  padding: 1rem 1.1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  flex: 1;
+}
+
+.resource-speaker {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  padding: 0.18rem 0.6rem;
+  border-radius: 2rem;
+  align-self: flex-start;
+}
+
+.resource-speaker--geisler {
+  background: rgba(240, 165, 0, 0.12);
+  color: var(--gold-dim);
+  border: 1px solid rgba(240, 165, 0, 0.25);
+}
+
+.resource-speaker--turek {
+  background: rgba(66, 133, 244, 0.12);
+  color: #7ab3f5;
+  border: 1px solid rgba(66, 133, 244, 0.25);
+}
+
+.resource-speaker--david {
+  background: rgba(240, 165, 0, 0.07);
+  color: #c4a84e;
+  border: 1px solid rgba(240, 165, 0, 0.15);
+}
+
+.resource-speaker--lennox {
+  background: rgba(76, 201, 110, 0.1);
+  color: #4cc96e;
+  border: 1px solid rgba(76, 201, 110, 0.25);
+}
+
+.resource-title {
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  color: var(--text);
+  line-height: 1.35;
+  margin: 0.1rem 0 0;
+}
+
+.resource-desc {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ---- Mobile ---- */
+@media (max-width: 600px) {
+  .resources-grid {
+    grid-template-columns: 1fr;
+  }
+}

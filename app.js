@@ -800,7 +800,110 @@ document.addEventListener('DOMContentLoaded', () => {
   initAuth();
   initJournalSaveButtons();
   initQuiz();
+  initResources();
 });
+
+// ============================================================
+// USEFUL RESOURCES
+// ============================================================
+
+const RESOURCES = [
+  {
+    id: 'jTu2zKM_wBs',
+    title: 'IF God Can Destroy Evil, WHY Doesn\'t He?',
+    speaker: 'Norman Geisler',
+    speakerKey: 'geisler',
+    duration: '~58 min',
+    desc: 'Dr. Geisler debates Rabbi Harold Kushner on why God permits evil — the book of Job\'s core question examined live.'
+  },
+  {
+    id: 'zVx8s3ve9TY',
+    title: 'A Brief Answer to the Problem of Evil',
+    speaker: 'Norman Geisler',
+    speakerKey: 'geisler',
+    duration: '~14 min',
+    desc: 'A concise 1987 presentation distilling Geisler\'s theodicy into its essential arguments — a great starting point.'
+  },
+  {
+    id: 'V2eNyrknOAk',
+    title: 'If God, Why Evil?',
+    speaker: 'Frank Turek',
+    speakerKey: 'turek',
+    duration: '~53 min',
+    desc: 'Turek walks through the logical and emotional dimensions of theodicy, building on Geisler\'s framework and his own.'
+  },
+  {
+    id: 'O_ebuiIHG4k',
+    title: 'If God is Good, Why Does Evil Exist?',
+    speaker: 'Frank Turek',
+    speakerKey: 'turek',
+    duration: '~23 min',
+    desc: 'A sharper, shorter answer distinguishing the logical problem of evil from the emotional problem — ideal for teens.'
+  },
+  {
+    id: 'hFSgXJITTjk',
+    title: 'Apologetics and the Legacy of Norman Geisler',
+    speaker: 'David Geisler',
+    speakerKey: 'david',
+    duration: '~38 min',
+    desc: 'Norman Geisler\'s son reflects on his father\'s theodicy framework and its continued relevance for apologetics today.'
+  },
+  {
+    id: 'MPm6Y-pANYI',
+    title: 'The Loud Absence: Where is God in Suffering?',
+    speaker: 'John Lennox',
+    speakerKey: 'lennox',
+    duration: '~1 hr 8 min',
+    desc: 'Oxford mathematician John Lennox addresses suffering and God\'s silence at Harvard Medical School — profound and pastoral.'
+  },
+  {
+    id: 'TamlDfiJqD0',
+    title: 'If God is Good, Why is There Evil and Suffering?',
+    speaker: 'John Lennox',
+    speakerKey: 'lennox',
+    duration: '~43 min',
+    desc: 'Lennox and Neil deGrasse Tyson debate whether evil disproves God — a rigorous cross-worldview conversation.'
+  }
+];
+
+function initResources() {
+  const container = document.getElementById('resourcesGrid');
+  if (!container) return;
+
+  const filters = document.querySelectorAll('.resource-filter-btn');
+  let active = 'all';
+
+  function render() {
+    const visible = active === 'all' ? RESOURCES : RESOURCES.filter(r => r.speakerKey === active);
+    container.innerHTML = visible.map(r => `
+      <a class="resource-card" href="https://www.youtube.com/watch?v=${r.id}"
+         target="_blank" rel="noopener noreferrer">
+        <div class="resource-thumb">
+          <img src="https://img.youtube.com/vi/${r.id}/hqdefault.jpg"
+               alt="${r.title}" loading="lazy">
+          <div class="resource-play" aria-hidden="true">&#9654;</div>
+          <span class="resource-duration">${r.duration}</span>
+        </div>
+        <div class="resource-info">
+          <span class="resource-speaker resource-speaker--${r.speakerKey}">${r.speaker}</span>
+          <h4 class="resource-title">${r.title}</h4>
+          <p class="resource-desc">${r.desc}</p>
+        </div>
+      </a>
+    `).join('');
+  }
+
+  filters.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filters.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      active = btn.dataset.filter;
+      render();
+    });
+  });
+
+  render();
+}
 
 // ============================================================
 // CHAT ASSISTANT
