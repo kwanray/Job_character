@@ -1627,6 +1627,9 @@ section {
    AUTH — NAVBAR
    ============================================================ */
 
+/* Ensure the hidden attribute always wins over display:flex rules */
+[hidden] { display: none !important; }
+
 .nav-auth {
   display: flex;
   align-items: center;
