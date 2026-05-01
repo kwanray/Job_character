@@ -1298,6 +1298,7 @@ function openChatSidebar() {
   sidebar.classList.add('open');
   backdrop.classList.add('open');
   toggle.setAttribute('aria-expanded', 'true');
+  toggle.hidden = true;
 }
 
 function closeChatSidebar() {
@@ -1307,6 +1308,7 @@ function closeChatSidebar() {
   sidebar.classList.remove('open');
   backdrop.classList.remove('open');
   toggle.setAttribute('aria-expanded', 'false');
+  toggle.hidden = false;
 }
 
 function chatEscape(str) {
