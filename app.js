@@ -809,6 +809,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
 const RESOURCES = [
   {
+    id: 'LjUlHU5oDeE',
+    title: 'Norm Geisler: If God Why Evil',
+    speaker: 'Norman Geisler',
+    speakerKey: 'geisler',
+    duration: '~47 min',
+    desc: 'Geisler presents his complete theodicy framework in this signature lecture — the definitive introduction to his position on the problem of evil.'
+  },
+  {
     id: 'jTu2zKM_wBs',
     title: 'IF God Can Destroy Evil, WHY Doesn\'t He?',
     speaker: 'Norman Geisler',
