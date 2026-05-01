@@ -601,27 +601,34 @@ function shareQuizResult(characterName) {
 // ============================================================
 
 function initNav() {
-  const navbar = document.getElementById('navbar');
+  const navbar    = document.getElementById('navbar');
   const navToggle = document.getElementById('navToggle');
-  const navLinks = document.getElementById('navLinks');
+  const navLinks  = document.getElementById('navLinks');
+  const backToTop = document.getElementById('backToTop');
 
   if (!navbar) return;
 
   window.addEventListener('scroll', () => {
     navbar.classList.toggle('scrolled', window.scrollY > 40);
+    if (backToTop) backToTop.hidden = window.scrollY < 400;
   }, { passive: true });
+
+  if (backToTop) {
+    backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  }
 
   if (navToggle && navLinks) {
     navToggle.addEventListener('click', () => {
       const isOpen = navLinks.classList.toggle('open');
       navToggle.setAttribute('aria-expanded', String(isOpen));
+      document.body.classList.toggle('nav-open', isOpen);
     });
 
-    // Close mobile nav on link click
     navLinks.querySelectorAll('.nav-link').forEach(link => {
       link.addEventListener('click', () => {
         navLinks.classList.remove('open');
         navToggle.setAttribute('aria-expanded', 'false');
+        document.body.classList.remove('nav-open');
       });
     });
   }
